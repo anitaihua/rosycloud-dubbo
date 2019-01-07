@@ -21,3 +21,18 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+.idea/artifacts/
+.idea/compiler.xml
+.idea/encodings.xml
+.idea/libraries/
+.idea/misc.xml
+.idea/modules.xml
+.idea/rosycloud-dubbo.iml
+.idea/workspace.xml
+rosycloud-common/rosycloud-common.iml
+rosycloud-dao/rosycloud-dao.iml
+rosycloud-interface/rosycloud-interface.iml
+rosycloud-pojo/rosycloud-pojo.iml
+rosycloud-service/rosycloud-service.iml
+rosycloud-web/rosycloud-web.iml
