@@ -1,5 +1,11 @@
 #Folders
 target
+rosycloud-common\target
+rosycloud-dao\target
+rosycloud-interface\target
+rosycloud-pojo\target
+rosycloud-service\target
+rosycloud-web\target
 
 #IDEA project file
 *.iml
