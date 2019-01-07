@@ -20,12 +20,44 @@
     <!-- 当前应用名称（是注册中心识别的名称） -->
     <dubbo:application name="rosycloud-web"/>
     <!-- 注册中心地址(zookeeper) -->
-    <dubbo:registry address="zookeeper://10.10.10.121:2181"/>
+    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
     <!-- 配置包扫描（同样不需要SpringMVC的包扫描） -->
     <dubbo:annotation package="cn.rosycloud.controller"/>
 
     <dubbo:reference interface="cn.rosycloud.service.SystemService" id="systemServiceImpl"  check="false"/>
-    <dubbo:reference interface="cn.rosycloud.service.UsersService" id="usersServiceImpl"  check="false"/>
+
+    <dubbo:reference interface="cn.rosycloud.service.ArticlesService" id="articlesServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.CommentsService" id="commentsServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.FloorsService" id="floorsServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.ForumsService" id="forumsServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.FriendLinksService" id="friendLinksServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.LabelsService" id="labelsServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.LogService" id="logServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.MenusService" id="menusServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.ModeratorService" id="moderatorServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.OptionsService" id="optionsServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.PostsService" id="postsServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.SetArtitleLabelService" id="setArtitleLabelServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.SetArtitleSortService" id="setArtitleSortServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.SortsService" id="sortsServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.SubmenusService" id="submenusServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.UserFriendsService" id="userFriendsServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.UsersService" id="usersServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.VArticlesService" id="vArticlesServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.VArticleUnderTheQueryTabService" id="vArticleUnderTheQueryTabServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.VForumsService" id="vForumsServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.VFriendsService" id="vFriendsServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.VLabelService" id="vLabelServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.VPostsService" id="vPostsServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.VQueryAllUsersFriendsService" id="vQueryAllUsersFriendsServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.VQueryClassifiedArticlesService" id="vQueryClassifiedArticlesServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.VQueryForumPostsService" id="vQueryForumPostsServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.VQueryUserPostedPostsService" id="vQueryUserPostedPostsServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.VQueryUserPublishedArticlesService" id="vQueryUserPublishedArticlesServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.VSortService" id="vSortServiceImpl" check="false" />
+
+
+
 
 
     <!-- SpringMVC的基本控制器 -->

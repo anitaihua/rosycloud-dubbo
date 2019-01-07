@@ -1,19 +1,16 @@
 package cn.rosycloud.mapper;
 
 import cn.rosycloud.pojo.Options;
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 
-public interface OptionsMapper {
-    int deleteByPrimaryKey(Integer optionId);
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author yangdaihua
+ * @since 2019-01-07
+ */
+public interface OptionsMapper extends BaseMapper<Options> {
 
-    int insert(Options record);
-
-    int insertSelective(Options record);
-
-    Options selectByPrimaryKey(Integer optionId);
-
-    int updateByPrimaryKeySelective(Options record);
-
-    int updateByPrimaryKeyWithBLOBs(Options record);
-
-    int updateByPrimaryKey(Options record);
 }

@@ -1,12 +1,11 @@
 package cn.rosycloud.service;
 
+import cn.rosycloud.pojo.Log;
+
 public interface SystemService {
 
     /**
      * 日志添加
-     * @param LogContent 内容
-     * @param loglevel 级别
-     * @param operatetype 类型
      */
-     void addLog(String LogContent,Short operatetype, Short loglevel);
+     void addLog(Log log);
 }

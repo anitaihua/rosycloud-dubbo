@@ -4,13 +4,14 @@ import cn.rosycloud.mapper.UsersMapper;
 import cn.rosycloud.pojo.Users;
 import cn.rosycloud.service.UsersService;
 import com.alibaba.dubbo.config.annotation.Service;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-public class UsersServiceImpl implements UsersService {
+public class UsersServiceImpl extends ServiceImpl<UsersMapper,Users> implements UsersService {
 
     @Autowired
     private UsersMapper usersMapper;

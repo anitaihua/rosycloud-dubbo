@@ -1,19 +1,16 @@
 package cn.rosycloud.mapper;
 
 import cn.rosycloud.pojo.Comments;
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 
-public interface CommentsMapper {
-    int deleteByPrimaryKey(Long commentId);
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author yangdaihua
+ * @since 2019-01-07
+ */
+public interface CommentsMapper extends BaseMapper<Comments> {
 
-    int insert(Comments record);
-
-    int insertSelective(Comments record);
-
-    Comments selectByPrimaryKey(Long commentId);
-
-    int updateByPrimaryKeySelective(Comments record);
-
-    int updateByPrimaryKeyWithBLOBs(Comments record);
-
-    int updateByPrimaryKey(Comments record);
 }

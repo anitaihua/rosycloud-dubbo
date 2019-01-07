@@ -1,20 +1,16 @@
 package cn.rosycloud.mapper;
 
 import cn.rosycloud.pojo.Posts;
-import cn.rosycloud.pojo.PostsWithBLOBs;
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 
-public interface PostsMapper {
-    int deleteByPrimaryKey(Long postId);
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author yangdaihua
+ * @since 2019-01-07
+ */
+public interface PostsMapper extends BaseMapper<Posts> {
 
-    int insert(PostsWithBLOBs record);
-
-    int insertSelective(PostsWithBLOBs record);
-
-    PostsWithBLOBs selectByPrimaryKey(Long postId);
-
-    int updateByPrimaryKeySelective(PostsWithBLOBs record);
-
-    int updateByPrimaryKeyWithBLOBs(PostsWithBLOBs record);
-
-    int updateByPrimaryKey(Posts record);
 }

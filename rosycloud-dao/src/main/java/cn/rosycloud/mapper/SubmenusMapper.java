@@ -1,17 +1,16 @@
 package cn.rosycloud.mapper;
 
 import cn.rosycloud.pojo.Submenus;
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 
-public interface SubmenusMapper {
-    int deleteByPrimaryKey(Long linkId);
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author yangdaihua
+ * @since 2019-01-07
+ */
+public interface SubmenusMapper extends BaseMapper<Submenus> {
 
-    int insert(Submenus record);
-
-    int insertSelective(Submenus record);
-
-    Submenus selectByPrimaryKey(Long linkId);
-
-    int updateByPrimaryKeySelective(Submenus record);
-
-    int updateByPrimaryKey(Submenus record);
 }

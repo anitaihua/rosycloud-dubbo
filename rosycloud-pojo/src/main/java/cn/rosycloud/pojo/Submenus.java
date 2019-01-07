@@ -1,19 +1,32 @@
 package cn.rosycloud.pojo;
 
+import com.baomidou.mybatisplus.enums.IdType;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.enums.IdType;
+import com.baomidou.mybatisplus.activerecord.Model;
 import java.io.Serializable;
 
-public class Submenus implements Serializable {
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author yangdaihua
+ * @since 2019-01-07
+ */
+public class Submenus extends Model<Submenus> {
+
+    private static final long serialVersionUID = 1L;
+
+    @TableId(value = "link_id", type = IdType.AUTO)
     private Long linkId;
-
     private Long menuId;
-
     private String linkName;
-
     private String linkTarget;
-
     private String linkOpenWay;
-
     private Long parentLinkId;
+
 
     public Long getLinkId() {
         return linkId;
@@ -36,7 +49,7 @@ public class Submenus implements Serializable {
     }
 
     public void setLinkName(String linkName) {
-        this.linkName = linkName == null ? null : linkName.trim();
+        this.linkName = linkName;
     }
 
     public String getLinkTarget() {
@@ -44,7 +57,7 @@ public class Submenus implements Serializable {
     }
 
     public void setLinkTarget(String linkTarget) {
-        this.linkTarget = linkTarget == null ? null : linkTarget.trim();
+        this.linkTarget = linkTarget;
     }
 
     public String getLinkOpenWay() {
@@ -52,7 +65,7 @@ public class Submenus implements Serializable {
     }
 
     public void setLinkOpenWay(String linkOpenWay) {
-        this.linkOpenWay = linkOpenWay == null ? null : linkOpenWay.trim();
+        this.linkOpenWay = linkOpenWay;
     }
 
     public Long getParentLinkId() {
@@ -64,14 +77,19 @@ public class Submenus implements Serializable {
     }
 
     @Override
+    protected Serializable pkVal() {
+        return this.linkId;
+    }
+
+    @Override
     public String toString() {
         return "Submenus{" +
-                "linkId=" + linkId +
-                ", menuId=" + menuId +
-                ", linkName='" + linkName + '\'' +
-                ", linkTarget='" + linkTarget + '\'' +
-                ", linkOpenWay='" + linkOpenWay + '\'' +
-                ", parentLinkId=" + parentLinkId +
-                '}';
+        ", linkId=" + linkId +
+        ", menuId=" + menuId +
+        ", linkName=" + linkName +
+        ", linkTarget=" + linkTarget +
+        ", linkOpenWay=" + linkOpenWay +
+        ", parentLinkId=" + parentLinkId +
+        "}";
     }
 }

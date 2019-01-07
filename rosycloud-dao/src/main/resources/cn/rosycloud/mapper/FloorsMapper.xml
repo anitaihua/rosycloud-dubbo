@@ -1,121 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.rosycloud.mapper.FloorsMapper">
-  <resultMap id="BaseResultMap" type="cn.rosycloud.pojo.Floors">
-    <id column="floor_id" jdbcType="BIGINT" property="floorId" />
-    <result column="user_id" jdbcType="BIGINT" property="userId" />
-    <result column="post_id" jdbcType="BIGINT" property="postId" />
-    <result column="floor_date" jdbcType="TIMESTAMP" property="floorDate" />
-    <result column="parent_floor_id" jdbcType="BIGINT" property="parentFloorId" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.rosycloud.pojo.Floors">
-    <result column="floor_content" jdbcType="LONGVARCHAR" property="floorContent" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    floor_id, user_id, post_id, floor_date, parent_floor_id
-  </sql>
-  <sql id="Blob_Column_List">
-    floor_content
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from floors
-    where floor_id = #{floorId,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from floors
-    where floor_id = #{floorId,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="cn.rosycloud.pojo.Floors">
-    insert into floors (floor_id, user_id, post_id, 
-      floor_date, parent_floor_id, floor_content
-      )
-    values (#{floorId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{postId,jdbcType=BIGINT}, 
-      #{floorDate,jdbcType=TIMESTAMP}, #{parentFloorId,jdbcType=BIGINT}, #{floorContent,jdbcType=LONGVARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="cn.rosycloud.pojo.Floors">
-    insert into floors
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="floorId != null">
-        floor_id,
-      </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="postId != null">
-        post_id,
-      </if>
-      <if test="floorDate != null">
-        floor_date,
-      </if>
-      <if test="parentFloorId != null">
-        parent_floor_id,
-      </if>
-      <if test="floorContent != null">
-        floor_content,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="floorId != null">
-        #{floorId,jdbcType=BIGINT},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=BIGINT},
-      </if>
-      <if test="postId != null">
-        #{postId,jdbcType=BIGINT},
-      </if>
-      <if test="floorDate != null">
-        #{floorDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="parentFloorId != null">
-        #{parentFloorId,jdbcType=BIGINT},
-      </if>
-      <if test="floorContent != null">
-        #{floorContent,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.rosycloud.pojo.Floors">
-    update floors
-    <set>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=BIGINT},
-      </if>
-      <if test="postId != null">
-        post_id = #{postId,jdbcType=BIGINT},
-      </if>
-      <if test="floorDate != null">
-        floor_date = #{floorDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="parentFloorId != null">
-        parent_floor_id = #{parentFloorId,jdbcType=BIGINT},
-      </if>
-      <if test="floorContent != null">
-        floor_content = #{floorContent,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where floor_id = #{floorId,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.rosycloud.pojo.Floors">
-    update floors
-    set user_id = #{userId,jdbcType=BIGINT},
-      post_id = #{postId,jdbcType=BIGINT},
-      floor_date = #{floorDate,jdbcType=TIMESTAMP},
-      parent_floor_id = #{parentFloorId,jdbcType=BIGINT},
-      floor_content = #{floorContent,jdbcType=LONGVARCHAR}
-    where floor_id = #{floorId,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="cn.rosycloud.pojo.Floors">
-    update floors
-    set user_id = #{userId,jdbcType=BIGINT},
-      post_id = #{postId,jdbcType=BIGINT},
-      floor_date = #{floorDate,jdbcType=TIMESTAMP},
-      parent_floor_id = #{parentFloorId,jdbcType=BIGINT}
-    where floor_id = #{floorId,jdbcType=BIGINT}
-  </update>
+
+    <!-- 开启二级缓存 -->
+    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.rosycloud.pojo.Floors">
+        <id column="floor_id" property="floorId" />
+        <result column="user_id" property="userId" />
+        <result column="post_id" property="postId" />
+        <result column="floor_content" property="floorContent" />
+        <result column="floor_date" property="floorDate" />
+        <result column="parent_floor_id" property="parentFloorId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        floor_id, user_id, post_id, floor_content, floor_date, parent_floor_id
+    </sql>
+
 </mapper>

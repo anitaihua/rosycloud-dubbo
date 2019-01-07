@@ -1,19 +1,16 @@
 package cn.rosycloud.mapper;
 
 import cn.rosycloud.pojo.Sorts;
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 
-public interface SortsMapper {
-    int deleteByPrimaryKey(Long sortId);
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author yangdaihua
+ * @since 2019-01-07
+ */
+public interface SortsMapper extends BaseMapper<Sorts> {
 
-    int insert(Sorts record);
-
-    int insertSelective(Sorts record);
-
-    Sorts selectByPrimaryKey(Long sortId);
-
-    int updateByPrimaryKeySelective(Sorts record);
-
-    int updateByPrimaryKeyWithBLOBs(Sorts record);
-
-    int updateByPrimaryKey(Sorts record);
 }

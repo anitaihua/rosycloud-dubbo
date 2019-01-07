@@ -1,17 +1,31 @@
 package cn.rosycloud.pojo;
 
+import com.baomidou.mybatisplus.enums.IdType;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.enums.IdType;
+import com.baomidou.mybatisplus.activerecord.Model;
 import java.io.Serializable;
 
-public class FriendLinks implements Serializable {
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author yangdaihua
+ * @since 2019-01-07
+ */
+public class FriendLinks extends Model<FriendLinks> {
+
+    private static final long serialVersionUID = 1L;
+
+    @TableId(value = "friend_link_id", type = IdType.AUTO)
     private Long friendLinkId;
-
     private String friendLinks;
-
     private String friendLinkName;
-
+    private String friendLinkDescription;
     private String friendLinkLogo;
 
-    private String friendLinkDescription;
 
     public Long getFriendLinkId() {
         return friendLinkId;
@@ -26,7 +40,7 @@ public class FriendLinks implements Serializable {
     }
 
     public void setFriendLinks(String friendLinks) {
-        this.friendLinks = friendLinks == null ? null : friendLinks.trim();
+        this.friendLinks = friendLinks;
     }
 
     public String getFriendLinkName() {
@@ -34,15 +48,7 @@ public class FriendLinks implements Serializable {
     }
 
     public void setFriendLinkName(String friendLinkName) {
-        this.friendLinkName = friendLinkName == null ? null : friendLinkName.trim();
-    }
-
-    public String getFriendLinkLogo() {
-        return friendLinkLogo;
-    }
-
-    public void setFriendLinkLogo(String friendLinkLogo) {
-        this.friendLinkLogo = friendLinkLogo == null ? null : friendLinkLogo.trim();
+        this.friendLinkName = friendLinkName;
     }
 
     public String getFriendLinkDescription() {
@@ -50,17 +56,30 @@ public class FriendLinks implements Serializable {
     }
 
     public void setFriendLinkDescription(String friendLinkDescription) {
-        this.friendLinkDescription = friendLinkDescription == null ? null : friendLinkDescription.trim();
+        this.friendLinkDescription = friendLinkDescription;
+    }
+
+    public String getFriendLinkLogo() {
+        return friendLinkLogo;
+    }
+
+    public void setFriendLinkLogo(String friendLinkLogo) {
+        this.friendLinkLogo = friendLinkLogo;
+    }
+
+    @Override
+    protected Serializable pkVal() {
+        return this.friendLinkId;
     }
 
     @Override
     public String toString() {
         return "FriendLinks{" +
-                "friendLinkId=" + friendLinkId +
-                ", friendLinks='" + friendLinks + '\'' +
-                ", friendLinkName='" + friendLinkName + '\'' +
-                ", friendLinkLogo='" + friendLinkLogo + '\'' +
-                ", friendLinkDescription='" + friendLinkDescription + '\'' +
-                '}';
+        ", friendLinkId=" + friendLinkId +
+        ", friendLinks=" + friendLinks +
+        ", friendLinkName=" + friendLinkName +
+        ", friendLinkDescription=" + friendLinkDescription +
+        ", friendLinkLogo=" + friendLinkLogo +
+        "}";
     }
 }

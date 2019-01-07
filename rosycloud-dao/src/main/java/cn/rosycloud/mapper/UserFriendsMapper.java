@@ -1,17 +1,16 @@
 package cn.rosycloud.mapper;
 
 import cn.rosycloud.pojo.UserFriends;
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 
-public interface UserFriendsMapper {
-    int deleteByPrimaryKey(Long id);
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author yangdaihua
+ * @since 2019-01-07
+ */
+public interface UserFriendsMapper extends BaseMapper<UserFriends> {
 
-    int insert(UserFriends record);
-
-    int insertSelective(UserFriends record);
-
-    UserFriends selectByPrimaryKey(Long id);
-
-    int updateByPrimaryKeySelective(UserFriends record);
-
-    int updateByPrimaryKey(UserFriends record);
 }

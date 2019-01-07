@@ -1,17 +1,16 @@
 package cn.rosycloud.mapper;
 
 import cn.rosycloud.pojo.Menus;
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 
-public interface MenusMapper {
-    int deleteByPrimaryKey(Long menuId);
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author yangdaihua
+ * @since 2019-01-07
+ */
+public interface MenusMapper extends BaseMapper<Menus> {
 
-    int insert(Menus record);
-
-    int insertSelective(Menus record);
-
-    Menus selectByPrimaryKey(Long menuId);
-
-    int updateByPrimaryKeySelective(Menus record);
-
-    int updateByPrimaryKey(Menus record);
 }

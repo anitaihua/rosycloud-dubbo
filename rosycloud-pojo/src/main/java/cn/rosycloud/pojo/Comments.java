@@ -1,22 +1,34 @@
 package cn.rosycloud.pojo;
 
-import java.io.Serializable;
+import com.baomidou.mybatisplus.enums.IdType;
 import java.util.Date;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.enums.IdType;
+import com.baomidou.mybatisplus.activerecord.Model;
+import java.io.Serializable;
 
-public class Comments implements Serializable {
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author yangdaihua
+ * @since 2019-01-07
+ */
+public class Comments extends Model<Comments> {
+
+    private static final long serialVersionUID = 1L;
+
+    @TableId(value = "comment_id", type = IdType.AUTO)
     private Long commentId;
-
     private Long userId;
-
     private Long articleId;
-
     private Long commentLikeCount;
-
     private Date commentDate;
-
+    private String commentContent;
     private Long parentCommentId;
 
-    private String commentContent;
 
     public Long getCommentId() {
         return commentId;
@@ -58,6 +70,14 @@ public class Comments implements Serializable {
         this.commentDate = commentDate;
     }
 
+    public String getCommentContent() {
+        return commentContent;
+    }
+
+    public void setCommentContent(String commentContent) {
+        this.commentContent = commentContent;
+    }
+
     public Long getParentCommentId() {
         return parentCommentId;
     }
@@ -66,24 +86,21 @@ public class Comments implements Serializable {
         this.parentCommentId = parentCommentId;
     }
 
-    public String getCommentContent() {
-        return commentContent;
-    }
-
-    public void setCommentContent(String commentContent) {
-        this.commentContent = commentContent == null ? null : commentContent.trim();
+    @Override
+    protected Serializable pkVal() {
+        return this.commentId;
     }
 
     @Override
     public String toString() {
         return "Comments{" +
-                "commentId=" + commentId +
-                ", userId=" + userId +
-                ", articleId=" + articleId +
-                ", commentLikeCount=" + commentLikeCount +
-                ", commentDate=" + commentDate +
-                ", parentCommentId=" + parentCommentId +
-                ", commentContent='" + commentContent + '\'' +
-                '}';
+        ", commentId=" + commentId +
+        ", userId=" + userId +
+        ", articleId=" + articleId +
+        ", commentLikeCount=" + commentLikeCount +
+        ", commentDate=" + commentDate +
+        ", commentContent=" + commentContent +
+        ", parentCommentId=" + parentCommentId +
+        "}";
     }
 }

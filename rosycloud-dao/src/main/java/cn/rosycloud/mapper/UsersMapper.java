@@ -1,23 +1,21 @@
 package cn.rosycloud.mapper;
 
 import cn.rosycloud.pojo.Users;
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 
 import java.util.List;
 
-public interface UsersMapper {
-    int deleteByPrimaryKey(Long userId);
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author yangdaihua
+ * @since 2019-01-07
+ */
+public interface UsersMapper extends BaseMapper<Users> {
 
-    int insert(Users record);
-
-    int insertSelective(Users record);
-
-    Users selectByPrimaryKey(Long userId);
-
-    int updateByPrimaryKeySelective(Users user);
-
-    int updateByPrimaryKey(Users record);
+    Users findUserByUnameAndPasswd(Users u);
 
     List<Users> getUsers();
-
-    Users findUserByUnameAndPasswd(Users user);
 }

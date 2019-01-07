@@ -1,19 +1,32 @@
 package cn.rosycloud.pojo;
 
+import com.baomidou.mybatisplus.enums.IdType;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.enums.IdType;
+import com.baomidou.mybatisplus.activerecord.Model;
 import java.io.Serializable;
 
-public class Forums implements Serializable {
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author yangdaihua
+ * @since 2019-01-07
+ */
+public class Forums extends Model<Forums> {
+
+    private static final long serialVersionUID = 1L;
+
+    @TableId(value = "forum_id", type = IdType.AUTO)
     private Long forumId;
-
     private String forumName;
-
+    private String forumDescription;
     private String forumLogo;
-
     private Long forumPostCount;
-
     private Long parentForumId;
 
-    private String forumDescription;
 
     public Long getForumId() {
         return forumId;
@@ -28,7 +41,15 @@ public class Forums implements Serializable {
     }
 
     public void setForumName(String forumName) {
-        this.forumName = forumName == null ? null : forumName.trim();
+        this.forumName = forumName;
+    }
+
+    public String getForumDescription() {
+        return forumDescription;
+    }
+
+    public void setForumDescription(String forumDescription) {
+        this.forumDescription = forumDescription;
     }
 
     public String getForumLogo() {
@@ -36,7 +57,7 @@ public class Forums implements Serializable {
     }
 
     public void setForumLogo(String forumLogo) {
-        this.forumLogo = forumLogo == null ? null : forumLogo.trim();
+        this.forumLogo = forumLogo;
     }
 
     public Long getForumPostCount() {
@@ -55,23 +76,20 @@ public class Forums implements Serializable {
         this.parentForumId = parentForumId;
     }
 
-    public String getForumDescription() {
-        return forumDescription;
-    }
-
-    public void setForumDescription(String forumDescription) {
-        this.forumDescription = forumDescription == null ? null : forumDescription.trim();
+    @Override
+    protected Serializable pkVal() {
+        return this.forumId;
     }
 
     @Override
     public String toString() {
         return "Forums{" +
-                "forumId=" + forumId +
-                ", forumName='" + forumName + '\'' +
-                ", forumLogo='" + forumLogo + '\'' +
-                ", forumPostCount=" + forumPostCount +
-                ", parentForumId=" + parentForumId +
-                ", forumDescription='" + forumDescription + '\'' +
-                '}';
+        ", forumId=" + forumId +
+        ", forumName=" + forumName +
+        ", forumDescription=" + forumDescription +
+        ", forumLogo=" + forumLogo +
+        ", forumPostCount=" + forumPostCount +
+        ", parentForumId=" + parentForumId +
+        "}";
     }
 }

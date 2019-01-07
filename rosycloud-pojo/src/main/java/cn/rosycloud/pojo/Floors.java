@@ -1,20 +1,33 @@
 package cn.rosycloud.pojo;
 
-import java.io.Serializable;
+import com.baomidou.mybatisplus.enums.IdType;
 import java.util.Date;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.enums.IdType;
+import com.baomidou.mybatisplus.activerecord.Model;
+import java.io.Serializable;
 
-public class Floors implements Serializable {
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author yangdaihua
+ * @since 2019-01-07
+ */
+public class Floors extends Model<Floors> {
+
+    private static final long serialVersionUID = 1L;
+
+    @TableId(value = "floor_id", type = IdType.AUTO)
     private Long floorId;
-
     private Long userId;
-
     private Long postId;
-
+    private String floorContent;
     private Date floorDate;
-
     private Long parentFloorId;
 
-    private String floorContent;
 
     public Long getFloorId() {
         return floorId;
@@ -40,6 +53,14 @@ public class Floors implements Serializable {
         this.postId = postId;
     }
 
+    public String getFloorContent() {
+        return floorContent;
+    }
+
+    public void setFloorContent(String floorContent) {
+        this.floorContent = floorContent;
+    }
+
     public Date getFloorDate() {
         return floorDate;
     }
@@ -56,23 +77,20 @@ public class Floors implements Serializable {
         this.parentFloorId = parentFloorId;
     }
 
-    public String getFloorContent() {
-        return floorContent;
-    }
-
-    public void setFloorContent(String floorContent) {
-        this.floorContent = floorContent == null ? null : floorContent.trim();
+    @Override
+    protected Serializable pkVal() {
+        return this.floorId;
     }
 
     @Override
     public String toString() {
         return "Floors{" +
-                "floorId=" + floorId +
-                ", userId=" + userId +
-                ", postId=" + postId +
-                ", floorDate=" + floorDate +
-                ", parentFloorId=" + parentFloorId +
-                ", floorContent='" + floorContent + '\'' +
-                '}';
+        ", floorId=" + floorId +
+        ", userId=" + userId +
+        ", postId=" + postId +
+        ", floorContent=" + floorContent +
+        ", floorDate=" + floorDate +
+        ", parentFloorId=" + parentFloorId +
+        "}";
     }
 }

@@ -14,7 +14,7 @@
     <!-- 当前应用名称（是注册中心识别的名称） -->
     <dubbo:application name="rosycloud-service"/>
     <!-- 注册中心地址（zookeeper） -->
-    <dubbo:registry address="zookeeper://10.10.10.121:2181"/>
+    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
     <!-- 配置dubbo的包扫描 -->
     <dubbo:annotation package="cn.rosycloud.service.impl"/>
 

@@ -1,34 +1,40 @@
 package cn.rosycloud.pojo;
 
-import java.io.Serializable;
+import com.baomidou.mybatisplus.enums.IdType;
 import java.util.Date;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.enums.IdType;
+import com.baomidou.mybatisplus.activerecord.Model;
+import java.io.Serializable;
 
-public class Users implements Serializable {
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author yangdaihua
+ * @since 2019-01-07
+ */
+public class Users extends Model<Users> {
+
+    private static final long serialVersionUID = 1L;
+
+    @TableId(value = "user_id", type = IdType.AUTO)
     private Long userId;
-
     private String userIp;
-
     private String userName;
-
     private String userPassword;
-
     private String userEmail;
-
     private String userProfilePhoto;
-
     private String userLevel;
-
     private String userRights;
-
     private Date userRegistrationTime;
-
     private Date userBirthday;
-
-    private Byte userAge;
-
+    private Integer userAge;
     private Integer userTelephoneNumber;
-
     private String userNickname;
+
 
     public Long getUserId() {
         return userId;
@@ -43,7 +49,7 @@ public class Users implements Serializable {
     }
 
     public void setUserIp(String userIp) {
-        this.userIp = userIp == null ? null : userIp.trim();
+        this.userIp = userIp;
     }
 
     public String getUserName() {
@@ -51,7 +57,7 @@ public class Users implements Serializable {
     }
 
     public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
+        this.userName = userName;
     }
 
     public String getUserPassword() {
@@ -59,7 +65,7 @@ public class Users implements Serializable {
     }
 
     public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword == null ? null : userPassword.trim();
+        this.userPassword = userPassword;
     }
 
     public String getUserEmail() {
@@ -67,7 +73,7 @@ public class Users implements Serializable {
     }
 
     public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail == null ? null : userEmail.trim();
+        this.userEmail = userEmail;
     }
 
     public String getUserProfilePhoto() {
@@ -75,7 +81,7 @@ public class Users implements Serializable {
     }
 
     public void setUserProfilePhoto(String userProfilePhoto) {
-        this.userProfilePhoto = userProfilePhoto == null ? null : userProfilePhoto.trim();
+        this.userProfilePhoto = userProfilePhoto;
     }
 
     public String getUserLevel() {
@@ -83,7 +89,7 @@ public class Users implements Serializable {
     }
 
     public void setUserLevel(String userLevel) {
-        this.userLevel = userLevel == null ? null : userLevel.trim();
+        this.userLevel = userLevel;
     }
 
     public String getUserRights() {
@@ -91,7 +97,7 @@ public class Users implements Serializable {
     }
 
     public void setUserRights(String userRights) {
-        this.userRights = userRights == null ? null : userRights.trim();
+        this.userRights = userRights;
     }
 
     public Date getUserRegistrationTime() {
@@ -110,11 +116,11 @@ public class Users implements Serializable {
         this.userBirthday = userBirthday;
     }
 
-    public Byte getUserAge() {
+    public Integer getUserAge() {
         return userAge;
     }
 
-    public void setUserAge(Byte userAge) {
+    public void setUserAge(Integer userAge) {
         this.userAge = userAge;
     }
 
@@ -131,25 +137,30 @@ public class Users implements Serializable {
     }
 
     public void setUserNickname(String userNickname) {
-        this.userNickname = userNickname == null ? null : userNickname.trim();
+        this.userNickname = userNickname;
+    }
+
+    @Override
+    protected Serializable pkVal() {
+        return this.userId;
     }
 
     @Override
     public String toString() {
         return "Users{" +
-                "userId=" + userId +
-                ", userIp='" + userIp + '\'' +
-                ", userName='" + userName + '\'' +
-                ", userPassword='" + userPassword + '\'' +
-                ", userEmail='" + userEmail + '\'' +
-                ", userProfilePhoto='" + userProfilePhoto + '\'' +
-                ", userLevel='" + userLevel + '\'' +
-                ", userRights='" + userRights + '\'' +
-                ", userRegistrationTime=" + userRegistrationTime +
-                ", userBirthday=" + userBirthday +
-                ", userAge=" + userAge +
-                ", userTelephoneNumber=" + userTelephoneNumber +
-                ", userNickname='" + userNickname + '\'' +
-                '}';
+        ", userId=" + userId +
+        ", userIp=" + userIp +
+        ", userName=" + userName +
+        ", userPassword=" + userPassword +
+        ", userEmail=" + userEmail +
+        ", userProfilePhoto=" + userProfilePhoto +
+        ", userLevel=" + userLevel +
+        ", userRights=" + userRights +
+        ", userRegistrationTime=" + userRegistrationTime +
+        ", userBirthday=" + userBirthday +
+        ", userAge=" + userAge +
+        ", userTelephoneNumber=" + userTelephoneNumber +
+        ", userNickname=" + userNickname +
+        "}";
     }
 }

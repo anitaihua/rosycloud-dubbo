@@ -1,15 +1,30 @@
 package cn.rosycloud.pojo;
 
+import com.baomidou.mybatisplus.enums.IdType;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.enums.IdType;
+import com.baomidou.mybatisplus.activerecord.Model;
 import java.io.Serializable;
 
-public class Labels implements Serializable {
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author yangdaihua
+ * @since 2019-01-07
+ */
+public class Labels extends Model<Labels> {
+
+    private static final long serialVersionUID = 1L;
+
+    @TableId(value = "label_id", type = IdType.AUTO)
     private Long labelId;
-
     private String labelName;
-
     private String labelAlias;
-
     private String labelDescription;
+
 
     public Long getLabelId() {
         return labelId;
@@ -24,7 +39,7 @@ public class Labels implements Serializable {
     }
 
     public void setLabelName(String labelName) {
-        this.labelName = labelName == null ? null : labelName.trim();
+        this.labelName = labelName;
     }
 
     public String getLabelAlias() {
@@ -32,7 +47,7 @@ public class Labels implements Serializable {
     }
 
     public void setLabelAlias(String labelAlias) {
-        this.labelAlias = labelAlias == null ? null : labelAlias.trim();
+        this.labelAlias = labelAlias;
     }
 
     public String getLabelDescription() {
@@ -40,16 +55,21 @@ public class Labels implements Serializable {
     }
 
     public void setLabelDescription(String labelDescription) {
-        this.labelDescription = labelDescription == null ? null : labelDescription.trim();
+        this.labelDescription = labelDescription;
+    }
+
+    @Override
+    protected Serializable pkVal() {
+        return this.labelId;
     }
 
     @Override
     public String toString() {
         return "Labels{" +
-                "labelId=" + labelId +
-                ", labelName='" + labelName + '\'' +
-                ", labelAlias='" + labelAlias + '\'' +
-                ", labelDescription='" + labelDescription + '\'' +
-                '}';
+        ", labelId=" + labelId +
+        ", labelName=" + labelName +
+        ", labelAlias=" + labelAlias +
+        ", labelDescription=" + labelDescription +
+        "}";
     }
 }

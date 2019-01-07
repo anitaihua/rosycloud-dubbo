@@ -1,17 +1,29 @@
 package cn.rosycloud.pojo;
 
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.enums.IdType;
+import com.baomidou.mybatisplus.activerecord.Model;
 import java.io.Serializable;
 
-public class Sorts implements Serializable {
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author yangdaihua
+ * @since 2019-01-07
+ */
+public class Sorts extends Model<Sorts> {
+
+    private static final long serialVersionUID = 1L;
+
+    @TableId(value = "sort_id", type = IdType.AUTO)
     private Long sortId;
-
     private String sortName;
-
     private String sortAlias;
-
+    private String sortDescription;
     private Long parentSortId;
 
-    private String sortDescription;
 
     public Long getSortId() {
         return sortId;
@@ -26,7 +38,7 @@ public class Sorts implements Serializable {
     }
 
     public void setSortName(String sortName) {
-        this.sortName = sortName == null ? null : sortName.trim();
+        this.sortName = sortName;
     }
 
     public String getSortAlias() {
@@ -34,7 +46,15 @@ public class Sorts implements Serializable {
     }
 
     public void setSortAlias(String sortAlias) {
-        this.sortAlias = sortAlias == null ? null : sortAlias.trim();
+        this.sortAlias = sortAlias;
+    }
+
+    public String getSortDescription() {
+        return sortDescription;
+    }
+
+    public void setSortDescription(String sortDescription) {
+        this.sortDescription = sortDescription;
     }
 
     public Long getParentSortId() {
@@ -45,22 +65,19 @@ public class Sorts implements Serializable {
         this.parentSortId = parentSortId;
     }
 
-    public String getSortDescription() {
-        return sortDescription;
-    }
-
-    public void setSortDescription(String sortDescription) {
-        this.sortDescription = sortDescription == null ? null : sortDescription.trim();
+    @Override
+    protected Serializable pkVal() {
+        return this.sortId;
     }
 
     @Override
     public String toString() {
         return "Sorts{" +
-                "sortId=" + sortId +
-                ", sortName='" + sortName + '\'' +
-                ", sortAlias='" + sortAlias + '\'' +
-                ", parentSortId=" + parentSortId +
-                ", sortDescription='" + sortDescription + '\'' +
-                '}';
+        ", sortId=" + sortId +
+        ", sortName=" + sortName +
+        ", sortAlias=" + sortAlias +
+        ", sortDescription=" + sortDescription +
+        ", parentSortId=" + parentSortId +
+        "}";
     }
 }

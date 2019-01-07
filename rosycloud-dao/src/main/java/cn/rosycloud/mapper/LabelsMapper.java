@@ -1,19 +1,16 @@
 package cn.rosycloud.mapper;
 
 import cn.rosycloud.pojo.Labels;
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 
-public interface LabelsMapper {
-    int deleteByPrimaryKey(Long labelId);
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author yangdaihua
+ * @since 2019-01-07
+ */
+public interface LabelsMapper extends BaseMapper<Labels> {
 
-    int insert(Labels record);
-
-    int insertSelective(Labels record);
-
-    Labels selectByPrimaryKey(Long labelId);
-
-    int updateByPrimaryKeySelective(Labels record);
-
-    int updateByPrimaryKeyWithBLOBs(Labels record);
-
-    int updateByPrimaryKey(Labels record);
 }

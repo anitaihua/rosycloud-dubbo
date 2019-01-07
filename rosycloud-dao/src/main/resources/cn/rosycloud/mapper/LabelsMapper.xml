@@ -1,95 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.rosycloud.mapper.LabelsMapper">
-  <resultMap id="BaseResultMap" type="cn.rosycloud.pojo.Labels">
-    <id column="label_id" jdbcType="BIGINT" property="labelId" />
-    <result column="label_name" jdbcType="VARCHAR" property="labelName" />
-    <result column="label_alias" jdbcType="VARCHAR" property="labelAlias" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.rosycloud.pojo.Labels">
-    <result column="label_description" jdbcType="LONGVARCHAR" property="labelDescription" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    label_id, label_name, label_alias
-  </sql>
-  <sql id="Blob_Column_List">
-    label_description
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from labels
-    where label_id = #{labelId,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from labels
-    where label_id = #{labelId,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="cn.rosycloud.pojo.Labels">
-    insert into labels (label_id, label_name, label_alias, 
-      label_description)
-    values (#{labelId,jdbcType=BIGINT}, #{labelName,jdbcType=VARCHAR}, #{labelAlias,jdbcType=VARCHAR}, 
-      #{labelDescription,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="cn.rosycloud.pojo.Labels">
-    insert into labels
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="labelId != null">
-        label_id,
-      </if>
-      <if test="labelName != null">
-        label_name,
-      </if>
-      <if test="labelAlias != null">
-        label_alias,
-      </if>
-      <if test="labelDescription != null">
-        label_description,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="labelId != null">
-        #{labelId,jdbcType=BIGINT},
-      </if>
-      <if test="labelName != null">
-        #{labelName,jdbcType=VARCHAR},
-      </if>
-      <if test="labelAlias != null">
-        #{labelAlias,jdbcType=VARCHAR},
-      </if>
-      <if test="labelDescription != null">
-        #{labelDescription,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.rosycloud.pojo.Labels">
-    update labels
-    <set>
-      <if test="labelName != null">
-        label_name = #{labelName,jdbcType=VARCHAR},
-      </if>
-      <if test="labelAlias != null">
-        label_alias = #{labelAlias,jdbcType=VARCHAR},
-      </if>
-      <if test="labelDescription != null">
-        label_description = #{labelDescription,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where label_id = #{labelId,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.rosycloud.pojo.Labels">
-    update labels
-    set label_name = #{labelName,jdbcType=VARCHAR},
-      label_alias = #{labelAlias,jdbcType=VARCHAR},
-      label_description = #{labelDescription,jdbcType=LONGVARCHAR}
-    where label_id = #{labelId,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="cn.rosycloud.pojo.Labels">
-    update labels
-    set label_name = #{labelName,jdbcType=VARCHAR},
-      label_alias = #{labelAlias,jdbcType=VARCHAR}
-    where label_id = #{labelId,jdbcType=BIGINT}
-  </update>
+
+    <!-- 开启二级缓存 -->
+    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.rosycloud.pojo.Labels">
+        <id column="label_id" property="labelId" />
+        <result column="label_name" property="labelName" />
+        <result column="label_alias" property="labelAlias" />
+        <result column="label_description" property="labelDescription" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        label_id, label_name, label_alias, label_description
+    </sql>
+
 </mapper>

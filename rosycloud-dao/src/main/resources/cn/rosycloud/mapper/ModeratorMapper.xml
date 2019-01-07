@@ -1,71 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.rosycloud.mapper.ModeratorMapper">
-  <resultMap id="BaseResultMap" type="cn.rosycloud.pojo.Moderator">
-    <id column="moderator_id" jdbcType="BIGINT" property="moderatorId" />
-    <id column="forum_id" jdbcType="BIGINT" property="forumId" />
-    <result column="moderator_level" jdbcType="VARCHAR" property="moderatorLevel" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    moderator_id, forum_id, moderator_level
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="cn.rosycloud.pojo.ModeratorKey" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from moderator
-    where moderator_id = #{moderatorId,jdbcType=BIGINT}
-      and forum_id = #{forumId,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="cn.rosycloud.pojo.ModeratorKey">
-    delete from moderator
-    where moderator_id = #{moderatorId,jdbcType=BIGINT}
-      and forum_id = #{forumId,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="cn.rosycloud.pojo.Moderator">
-    insert into moderator (moderator_id, forum_id, moderator_level
-      )
-    values (#{moderatorId,jdbcType=BIGINT}, #{forumId,jdbcType=BIGINT}, #{moderatorLevel,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="cn.rosycloud.pojo.Moderator">
-    insert into moderator
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="moderatorId != null">
-        moderator_id,
-      </if>
-      <if test="forumId != null">
-        forum_id,
-      </if>
-      <if test="moderatorLevel != null">
-        moderator_level,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="moderatorId != null">
-        #{moderatorId,jdbcType=BIGINT},
-      </if>
-      <if test="forumId != null">
-        #{forumId,jdbcType=BIGINT},
-      </if>
-      <if test="moderatorLevel != null">
-        #{moderatorLevel,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.rosycloud.pojo.Moderator">
-    update moderator
-    <set>
-      <if test="moderatorLevel != null">
-        moderator_level = #{moderatorLevel,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where moderator_id = #{moderatorId,jdbcType=BIGINT}
-      and forum_id = #{forumId,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="cn.rosycloud.pojo.Moderator">
-    update moderator
-    set moderator_level = #{moderatorLevel,jdbcType=VARCHAR}
-    where moderator_id = #{moderatorId,jdbcType=BIGINT}
-      and forum_id = #{forumId,jdbcType=BIGINT}
-  </update>
+
+    <!-- 开启二级缓存 -->
+    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.rosycloud.pojo.Moderator">
+        <id column="moderator_id" property="moderatorId" />
+        <result column="forum_id" property="forumId" />
+        <result column="moderator_level" property="moderatorLevel" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        moderator_id, forum_id, moderator_level
+    </sql>
+
 </mapper>

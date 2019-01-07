@@ -1,21 +1,35 @@
 package cn.rosycloud.pojo;
 
+import com.baomidou.mybatisplus.enums.IdType;
+import java.util.Date;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.enums.IdType;
+import com.baomidou.mybatisplus.activerecord.Model;
 import java.io.Serializable;
 
-import java.util.Date;
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author yangdaihua
+ * @since 2019-01-07
+ */
+public class Articles extends Model<Articles> {
 
-public class Articles implements Serializable{
+    private static final long serialVersionUID = 1L;
+
+    @TableId(value = "article_id", type = IdType.AUTO)
     private Long articleId;
-
     private Long userId;
-
+    private String articleTitle;
+    private String articleContent;
     private Long articleViews;
-
     private Long articleCommentCount;
-
     private Date articleDate;
-
     private Long articleLikeCount;
+
 
     public Long getArticleId() {
         return articleId;
@@ -31,6 +45,22 @@ public class Articles implements Serializable{
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getArticleTitle() {
+        return articleTitle;
+    }
+
+    public void setArticleTitle(String articleTitle) {
+        this.articleTitle = articleTitle;
+    }
+
+    public String getArticleContent() {
+        return articleContent;
+    }
+
+    public void setArticleContent(String articleContent) {
+        this.articleContent = articleContent;
     }
 
     public Long getArticleViews() {
@@ -66,14 +96,21 @@ public class Articles implements Serializable{
     }
 
     @Override
+    protected Serializable pkVal() {
+        return this.articleId;
+    }
+
+    @Override
     public String toString() {
         return "Articles{" +
-                "articleId=" + articleId +
-                ", userId=" + userId +
-                ", articleViews=" + articleViews +
-                ", articleCommentCount=" + articleCommentCount +
-                ", articleDate=" + articleDate +
-                ", articleLikeCount=" + articleLikeCount +
-                '}';
+        ", articleId=" + articleId +
+        ", userId=" + userId +
+        ", articleTitle=" + articleTitle +
+        ", articleContent=" + articleContent +
+        ", articleViews=" + articleViews +
+        ", articleCommentCount=" + articleCommentCount +
+        ", articleDate=" + articleDate +
+        ", articleLikeCount=" + articleLikeCount +
+        "}";
     }
 }

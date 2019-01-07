@@ -1,19 +1,16 @@
 package cn.rosycloud.mapper;
 
 import cn.rosycloud.pojo.FriendLinks;
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 
-public interface FriendLinksMapper {
-    int deleteByPrimaryKey(Long friendLinkId);
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author yangdaihua
+ * @since 2019-01-07
+ */
+public interface FriendLinksMapper extends BaseMapper<FriendLinks> {
 
-    int insert(FriendLinks record);
-
-    int insertSelective(FriendLinks record);
-
-    FriendLinks selectByPrimaryKey(Long friendLinkId);
-
-    int updateByPrimaryKeySelective(FriendLinks record);
-
-    int updateByPrimaryKeyWithBLOBs(FriendLinks record);
-
-    int updateByPrimaryKey(FriendLinks record);
 }

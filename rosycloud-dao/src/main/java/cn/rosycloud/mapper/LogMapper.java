@@ -1,20 +1,16 @@
 package cn.rosycloud.mapper;
 
 import cn.rosycloud.pojo.Log;
-import cn.rosycloud.pojo.LogWithBLOBs;
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 
-public interface LogMapper {
-    int deleteByPrimaryKey(Long logId);
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author yangdaihua
+ * @since 2019-01-07
+ */
+public interface LogMapper extends BaseMapper<Log> {
 
-    int insert(LogWithBLOBs record);
-
-    int insertSelective(LogWithBLOBs record);
-
-    LogWithBLOBs selectByPrimaryKey(Long logId);
-
-    int updateByPrimaryKeySelective(LogWithBLOBs record);
-
-    int updateByPrimaryKeyWithBLOBs(LogWithBLOBs record);
-
-    int updateByPrimaryKey(Log record);
 }

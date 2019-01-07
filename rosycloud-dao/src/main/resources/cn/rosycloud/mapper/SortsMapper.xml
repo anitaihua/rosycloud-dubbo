@@ -1,107 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.rosycloud.mapper.SortsMapper">
-  <resultMap id="BaseResultMap" type="cn.rosycloud.pojo.Sorts">
-    <id column="sort_id" jdbcType="BIGINT" property="sortId" />
-    <result column="sort_name" jdbcType="VARCHAR" property="sortName" />
-    <result column="sort_alias" jdbcType="VARCHAR" property="sortAlias" />
-    <result column="parent_sort_id" jdbcType="BIGINT" property="parentSortId" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.rosycloud.pojo.Sorts">
-    <result column="sort_description" jdbcType="LONGVARCHAR" property="sortDescription" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    sort_id, sort_name, sort_alias, parent_sort_id
-  </sql>
-  <sql id="Blob_Column_List">
-    sort_description
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from sorts
-    where sort_id = #{sortId,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from sorts
-    where sort_id = #{sortId,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="cn.rosycloud.pojo.Sorts">
-    insert into sorts (sort_id, sort_name, sort_alias, 
-      parent_sort_id, sort_description)
-    values (#{sortId,jdbcType=BIGINT}, #{sortName,jdbcType=VARCHAR}, #{sortAlias,jdbcType=VARCHAR}, 
-      #{parentSortId,jdbcType=BIGINT}, #{sortDescription,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="cn.rosycloud.pojo.Sorts">
-    insert into sorts
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="sortId != null">
-        sort_id,
-      </if>
-      <if test="sortName != null">
-        sort_name,
-      </if>
-      <if test="sortAlias != null">
-        sort_alias,
-      </if>
-      <if test="parentSortId != null">
-        parent_sort_id,
-      </if>
-      <if test="sortDescription != null">
-        sort_description,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="sortId != null">
-        #{sortId,jdbcType=BIGINT},
-      </if>
-      <if test="sortName != null">
-        #{sortName,jdbcType=VARCHAR},
-      </if>
-      <if test="sortAlias != null">
-        #{sortAlias,jdbcType=VARCHAR},
-      </if>
-      <if test="parentSortId != null">
-        #{parentSortId,jdbcType=BIGINT},
-      </if>
-      <if test="sortDescription != null">
-        #{sortDescription,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.rosycloud.pojo.Sorts">
-    update sorts
-    <set>
-      <if test="sortName != null">
-        sort_name = #{sortName,jdbcType=VARCHAR},
-      </if>
-      <if test="sortAlias != null">
-        sort_alias = #{sortAlias,jdbcType=VARCHAR},
-      </if>
-      <if test="parentSortId != null">
-        parent_sort_id = #{parentSortId,jdbcType=BIGINT},
-      </if>
-      <if test="sortDescription != null">
-        sort_description = #{sortDescription,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where sort_id = #{sortId,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.rosycloud.pojo.Sorts">
-    update sorts
-    set sort_name = #{sortName,jdbcType=VARCHAR},
-      sort_alias = #{sortAlias,jdbcType=VARCHAR},
-      parent_sort_id = #{parentSortId,jdbcType=BIGINT},
-      sort_description = #{sortDescription,jdbcType=LONGVARCHAR}
-    where sort_id = #{sortId,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="cn.rosycloud.pojo.Sorts">
-    update sorts
-    set sort_name = #{sortName,jdbcType=VARCHAR},
-      sort_alias = #{sortAlias,jdbcType=VARCHAR},
-      parent_sort_id = #{parentSortId,jdbcType=BIGINT}
-    where sort_id = #{sortId,jdbcType=BIGINT}
-  </update>
+
+    <!-- 开启二级缓存 -->
+    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.rosycloud.pojo.Sorts">
+        <id column="sort_id" property="sortId" />
+        <result column="sort_name" property="sortName" />
+        <result column="sort_alias" property="sortAlias" />
+        <result column="sort_description" property="sortDescription" />
+        <result column="parent_sort_id" property="parentSortId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        sort_id, sort_name, sort_alias, sort_description, parent_sort_id
+    </sql>
+
 </mapper>

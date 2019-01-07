@@ -1,19 +1,16 @@
 package cn.rosycloud.mapper;
 
 import cn.rosycloud.pojo.Forums;
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 
-public interface ForumsMapper {
-    int deleteByPrimaryKey(Long forumId);
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author yangdaihua
+ * @since 2019-01-07
+ */
+public interface ForumsMapper extends BaseMapper<Forums> {
 
-    int insert(Forums record);
-
-    int insertSelective(Forums record);
-
-    Forums selectByPrimaryKey(Long forumId);
-
-    int updateByPrimaryKeySelective(Forums record);
-
-    int updateByPrimaryKeyWithBLOBs(Forums record);
-
-    int updateByPrimaryKey(Forums record);
 }

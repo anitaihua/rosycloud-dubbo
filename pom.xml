@@ -25,9 +25,11 @@
         <dubbo.version>2.5.3</dubbo.version>
         <zookeeper.version>3.4.7</zookeeper.version>
         <zkclient.version>0.1</zkclient.version>
+        <mybatis-plus.version>2.3</mybatis-plus.version>
         <mybatis.version>3.2.8</mybatis.version>
         <mybatis.spring.version>1.2.2</mybatis.spring.version>
         <mybatis.paginator.version>1.2.15</mybatis.paginator.version>
+        <mybatis.ehcache.version>1.0.0</mybatis.ehcache.version>
         <mysql.version>5.1.32</mysql.version>
         <druid.version>1.0.9</druid.version>
         <commons-fileupload.version>1.3.1</commons-fileupload.version>
@@ -152,8 +154,17 @@
                 <artifactId>pagehelper</artifactId>
                 <version>${pagehelper.version}</version>
             </dependency>
-            <!-- Mybatis -->
+            <!-- Mybatis-Plus -->
             <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+
+
+            <!-- Mybatis -->
+            <!--<dependency>
                 <groupId>org.mybatis</groupId>
                 <artifactId>mybatis</artifactId>
                 <version>${mybatis.version}</version>
@@ -167,6 +178,12 @@
                 <groupId>com.github.miemiedev</groupId>
                 <artifactId>mybatis-paginator</artifactId>
                 <version>${mybatis.paginator.version}</version>
+            </dependency> -->
+
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-ehcache</artifactId>
+                <version>${mybatis.ehcache.version}</version>
             </dependency>
             <!-- MySql -->
             <dependency>
@@ -286,6 +303,17 @@
         </dependencies>
     </dependencyManagement>
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
         <plugins>
             <!-- java编译插件 -->
             <plugin>

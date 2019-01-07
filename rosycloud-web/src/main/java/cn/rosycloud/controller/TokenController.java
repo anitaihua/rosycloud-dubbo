@@ -8,7 +8,10 @@ import cn.rosycloud.model.TokenModel;
 import cn.rosycloud.authorization.manager.TokenManager;
 import cn.rosycloud.authorization.annotation.IgnoreSecurity;
 import cn.rosycloud.config.Constants;
+import cn.rosycloud.pojo.Users;
+import cn.rosycloud.service.SystemService;
 import cn.rosycloud.service.UsersService;
+import cn.rosycloud.utils.LogUtils;
 import cn.rosycloud.utils.Response;
 import com.alibaba.dubbo.config.annotation.Reference;
 import org.apache.log4j.Logger;
@@ -31,6 +34,8 @@ public class TokenController {
 
 	@Reference
 	private UsersService usersService;
+	@Reference
+	private SystemService systemService;
 	@Autowired
 	private TokenManager tokenManager;
 	private static final Logger log = Logger.getLogger(TokenController.class);
@@ -54,6 +59,7 @@ public class TokenController {
 			Cookie cookie = new Cookie(Constants.DEFAULT_TOKEN_NAME, token.getUserId()+"_"+token.getToken());
 			log.debug("Write Token to Cookie and return to the Client : " + cookie.toString());
 			response.addCookie(cookie);
+			systemService.addLog(LogUtils.getInstance("["+username+"]登陆成功",Constants.Log_Type_LOGIN,Constants.Log_Leavel_INFO));
 			return Response.ok("Login Success...");
 		}
 		return Response.error("Login Failure...");
@@ -69,8 +75,10 @@ public class TokenController {
 	public Response logout(HttpServletRequest request) {
 		String token = request.getHeader(Constants.DEFAULT_TOKEN_NAME);
 		TokenModel model = tokenManager.getToken(token);
+		Users user = usersService.selectById(model.getUserId());
 		tokenManager.deleteToken(model.getUserId());
 		log.debug("Logout Success...");
+		systemService.addLog(LogUtils.getInstance("["+user.getUserName()+"]登出成功",Constants.Log_Type_EXIT,Constants.Log_Leavel_INFO));
 		return Response.ok("Logout Success...");
 	}
 }

@@ -1,24 +1,65 @@
 package cn.rosycloud.pojo;
 
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.IdType;
 import java.util.Date;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.enums.IdType;
+import com.baomidou.mybatisplus.activerecord.Model;
+import java.io.Serializable;
 
-public class Log implements Serializable {
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author yangdaihua
+ * @since 2019-01-07
+ */
+public class Log extends Model<Log> {
+
+    private static final long serialVersionUID = 1L;
+
+    @TableId(value = "log_id", type = IdType.AUTO)
     private Long logId;
-
+    /**
+     * 浏览器
+     */
     private String broswer;
-
-    private Short logLevel;
-
+    /**
+     * 日志内容
+     */
+    private String logContent;
+    /**
+     * 日志级别
+     */
+    private Integer logLevel;
+    /**
+     * IP
+     */
+    private String note;
+    /**
+     * 操作时间
+     */
     private Date operateTime;
-
-    private Short operateType;
-
+    /**
+     * 操作类型
+     */
+    private Integer operateType;
+    /**
+     * 用户ID
+     */
     private Long userId;
-
+    /**
+     * 用户账号
+     */
     private String userName;
-
+    /**
+     * 真实名字
+     */
     private String realName;
+
 
     public Long getLogId() {
         return logId;
@@ -33,15 +74,31 @@ public class Log implements Serializable {
     }
 
     public void setBroswer(String broswer) {
-        this.broswer = broswer == null ? null : broswer.trim();
+        this.broswer = broswer;
     }
 
-    public Short getLogLevel() {
+    public String getLogContent() {
+        return logContent;
+    }
+
+    public void setLogContent(String logContent) {
+        this.logContent = logContent;
+    }
+
+    public Integer getLogLevel() {
         return logLevel;
     }
 
-    public void setLogLevel(Short logLevel) {
+    public void setLogLevel(Integer logLevel) {
         this.logLevel = logLevel;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public Date getOperateTime() {
@@ -52,11 +109,11 @@ public class Log implements Serializable {
         this.operateTime = operateTime;
     }
 
-    public Short getOperateType() {
+    public Integer getOperateType() {
         return operateType;
     }
 
-    public void setOperateType(Short operateType) {
+    public void setOperateType(Integer operateType) {
         this.operateType = operateType;
     }
 
@@ -73,7 +130,7 @@ public class Log implements Serializable {
     }
 
     public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
+        this.userName = userName;
     }
 
     public String getRealName() {
@@ -81,20 +138,27 @@ public class Log implements Serializable {
     }
 
     public void setRealName(String realName) {
-        this.realName = realName == null ? null : realName.trim();
+        this.realName = realName;
+    }
+
+    @Override
+    protected Serializable pkVal() {
+        return this.logId;
     }
 
     @Override
     public String toString() {
-        return "Log{" +
-                "logId=" + logId +
-                ", broswer='" + broswer + '\'' +
-                ", logLevel=" + logLevel +
-                ", operateTime=" + operateTime +
-                ", operateType=" + operateType +
-                ", userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", realName='" + realName + '\'' +
-                '}';
+        return "SysLog{" +
+        ", logId=" + logId +
+        ", broswer=" + broswer +
+        ", logContent=" + logContent +
+        ", logLevel=" + logLevel +
+        ", note=" + note +
+        ", operateTime=" + operateTime +
+        ", operateType=" + operateType +
+        ", userId=" + userId +
+        ", userName=" + userName +
+        ", realName=" + realName +
+        "}";
     }
 }
