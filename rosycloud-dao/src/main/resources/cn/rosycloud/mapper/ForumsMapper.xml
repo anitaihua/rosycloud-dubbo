@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.rosycloud.mapper.ForumsMapper">
+  <resultMap id="BaseResultMap" type="cn.rosycloud.pojo.Forums">
+    <id column="forum_id" jdbcType="BIGINT" property="forumId" />
+    <result column="forum_name" jdbcType="VARCHAR" property="forumName" />
+    <result column="forum_logo" jdbcType="VARCHAR" property="forumLogo" />
+    <result column="forum_post_count" jdbcType="BIGINT" property="forumPostCount" />
+    <result column="parent_forum_id" jdbcType="BIGINT" property="parentForumId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.rosycloud.pojo.Forums">
+    <result column="forum_description" jdbcType="LONGVARCHAR" property="forumDescription" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    forum_id, forum_name, forum_logo, forum_post_count, parent_forum_id
+  </sql>
+  <sql id="Blob_Column_List">
+    forum_description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from forums
+    where forum_id = #{forumId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from forums
+    where forum_id = #{forumId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.rosycloud.pojo.Forums">
+    insert into forums (forum_id, forum_name, forum_logo, 
+      forum_post_count, parent_forum_id, forum_description
+      )
+    values (#{forumId,jdbcType=BIGINT}, #{forumName,jdbcType=VARCHAR}, #{forumLogo,jdbcType=VARCHAR}, 
+      #{forumPostCount,jdbcType=BIGINT}, #{parentForumId,jdbcType=BIGINT}, #{forumDescription,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.rosycloud.pojo.Forums">
+    insert into forums
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="forumId != null">
+        forum_id,
+      </if>
+      <if test="forumName != null">
+        forum_name,
+      </if>
+      <if test="forumLogo != null">
+        forum_logo,
+      </if>
+      <if test="forumPostCount != null">
+        forum_post_count,
+      </if>
+      <if test="parentForumId != null">
+        parent_forum_id,
+      </if>
+      <if test="forumDescription != null">
+        forum_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="forumId != null">
+        #{forumId,jdbcType=BIGINT},
+      </if>
+      <if test="forumName != null">
+        #{forumName,jdbcType=VARCHAR},
+      </if>
+      <if test="forumLogo != null">
+        #{forumLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="forumPostCount != null">
+        #{forumPostCount,jdbcType=BIGINT},
+      </if>
+      <if test="parentForumId != null">
+        #{parentForumId,jdbcType=BIGINT},
+      </if>
+      <if test="forumDescription != null">
+        #{forumDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.rosycloud.pojo.Forums">
+    update forums
+    <set>
+      <if test="forumName != null">
+        forum_name = #{forumName,jdbcType=VARCHAR},
+      </if>
+      <if test="forumLogo != null">
+        forum_logo = #{forumLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="forumPostCount != null">
+        forum_post_count = #{forumPostCount,jdbcType=BIGINT},
+      </if>
+      <if test="parentForumId != null">
+        parent_forum_id = #{parentForumId,jdbcType=BIGINT},
+      </if>
+      <if test="forumDescription != null">
+        forum_description = #{forumDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where forum_id = #{forumId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.rosycloud.pojo.Forums">
+    update forums
+    set forum_name = #{forumName,jdbcType=VARCHAR},
+      forum_logo = #{forumLogo,jdbcType=VARCHAR},
+      forum_post_count = #{forumPostCount,jdbcType=BIGINT},
+      parent_forum_id = #{parentForumId,jdbcType=BIGINT},
+      forum_description = #{forumDescription,jdbcType=LONGVARCHAR}
+    where forum_id = #{forumId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.rosycloud.pojo.Forums">
+    update forums
+    set forum_name = #{forumName,jdbcType=VARCHAR},
+      forum_logo = #{forumLogo,jdbcType=VARCHAR},
+      forum_post_count = #{forumPostCount,jdbcType=BIGINT},
+      parent_forum_id = #{parentForumId,jdbcType=BIGINT}
+    where forum_id = #{forumId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.rosycloud.mapper.SetArtitleSortMapper">
+  <resultMap id="BaseResultMap" type="cn.rosycloud.pojo.SetArtitleSortKey">
+    <id column="article_id" jdbcType="BIGINT" property="articleId" />
+    <id column="sort_id" jdbcType="BIGINT" property="sortId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="cn.rosycloud.pojo.SetArtitleSortKey">
+    delete from set_artitle_sort
+    where article_id = #{articleId,jdbcType=BIGINT}
+      and sort_id = #{sortId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.rosycloud.pojo.SetArtitleSortKey">
+    insert into set_artitle_sort (article_id, sort_id)
+    values (#{articleId,jdbcType=BIGINT}, #{sortId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.rosycloud.pojo.SetArtitleSortKey">
+    insert into set_artitle_sort
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        article_id,
+      </if>
+      <if test="sortId != null">
+        sort_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        #{articleId,jdbcType=BIGINT},
+      </if>
+      <if test="sortId != null">
+        #{sortId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

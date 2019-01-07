@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.rosycloud.mapper.FriendLinksMapper">
+  <resultMap id="BaseResultMap" type="cn.rosycloud.pojo.FriendLinks">
+    <id column="friend_link_id" jdbcType="BIGINT" property="friendLinkId" />
+    <result column="friend_links" jdbcType="VARCHAR" property="friendLinks" />
+    <result column="friend_link_name" jdbcType="VARCHAR" property="friendLinkName" />
+    <result column="friend_link_logo" jdbcType="VARCHAR" property="friendLinkLogo" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.rosycloud.pojo.FriendLinks">
+    <result column="friend_link_description" jdbcType="LONGVARCHAR" property="friendLinkDescription" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    friend_link_id, friend_links, friend_link_name, friend_link_logo
+  </sql>
+  <sql id="Blob_Column_List">
+    friend_link_description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from friend_links
+    where friend_link_id = #{friendLinkId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from friend_links
+    where friend_link_id = #{friendLinkId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.rosycloud.pojo.FriendLinks">
+    insert into friend_links (friend_link_id, friend_links, friend_link_name, 
+      friend_link_logo, friend_link_description
+      )
+    values (#{friendLinkId,jdbcType=BIGINT}, #{friendLinks,jdbcType=VARCHAR}, #{friendLinkName,jdbcType=VARCHAR}, 
+      #{friendLinkLogo,jdbcType=VARCHAR}, #{friendLinkDescription,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.rosycloud.pojo.FriendLinks">
+    insert into friend_links
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="friendLinkId != null">
+        friend_link_id,
+      </if>
+      <if test="friendLinks != null">
+        friend_links,
+      </if>
+      <if test="friendLinkName != null">
+        friend_link_name,
+      </if>
+      <if test="friendLinkLogo != null">
+        friend_link_logo,
+      </if>
+      <if test="friendLinkDescription != null">
+        friend_link_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="friendLinkId != null">
+        #{friendLinkId,jdbcType=BIGINT},
+      </if>
+      <if test="friendLinks != null">
+        #{friendLinks,jdbcType=VARCHAR},
+      </if>
+      <if test="friendLinkName != null">
+        #{friendLinkName,jdbcType=VARCHAR},
+      </if>
+      <if test="friendLinkLogo != null">
+        #{friendLinkLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="friendLinkDescription != null">
+        #{friendLinkDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.rosycloud.pojo.FriendLinks">
+    update friend_links
+    <set>
+      <if test="friendLinks != null">
+        friend_links = #{friendLinks,jdbcType=VARCHAR},
+      </if>
+      <if test="friendLinkName != null">
+        friend_link_name = #{friendLinkName,jdbcType=VARCHAR},
+      </if>
+      <if test="friendLinkLogo != null">
+        friend_link_logo = #{friendLinkLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="friendLinkDescription != null">
+        friend_link_description = #{friendLinkDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where friend_link_id = #{friendLinkId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.rosycloud.pojo.FriendLinks">
+    update friend_links
+    set friend_links = #{friendLinks,jdbcType=VARCHAR},
+      friend_link_name = #{friendLinkName,jdbcType=VARCHAR},
+      friend_link_logo = #{friendLinkLogo,jdbcType=VARCHAR},
+      friend_link_description = #{friendLinkDescription,jdbcType=LONGVARCHAR}
+    where friend_link_id = #{friendLinkId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.rosycloud.pojo.FriendLinks">
+    update friend_links
+    set friend_links = #{friendLinks,jdbcType=VARCHAR},
+      friend_link_name = #{friendLinkName,jdbcType=VARCHAR},
+      friend_link_logo = #{friendLinkLogo,jdbcType=VARCHAR}
+    where friend_link_id = #{friendLinkId,jdbcType=BIGINT}
+  </update>
+</mapper>

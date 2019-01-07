@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.rosycloud.mapper.ArticlesMapper">
+  <resultMap id="BaseResultMap" type="cn.rosycloud.pojo.Articles">
+    <id column="article_id" jdbcType="BIGINT" property="articleId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="article_views" jdbcType="BIGINT" property="articleViews" />
+    <result column="article_comment_count" jdbcType="BIGINT" property="articleCommentCount" />
+    <result column="article_date" jdbcType="TIMESTAMP" property="articleDate" />
+    <result column="article_like_count" jdbcType="BIGINT" property="articleLikeCount" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.rosycloud.pojo.ArticlesWithBLOBs">
+    <result column="article_title" jdbcType="LONGVARCHAR" property="articleTitle" />
+    <result column="article_content" jdbcType="LONGVARCHAR" property="articleContent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    article_id, user_id, article_views, article_comment_count, article_date, article_like_count
+  </sql>
+  <sql id="Blob_Column_List">
+    article_title, article_content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from articles
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from articles
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.rosycloud.pojo.ArticlesWithBLOBs">
+    insert into articles (article_id, user_id, article_views, 
+      article_comment_count, article_date, article_like_count, 
+      article_title, article_content)
+    values (#{articleId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{articleViews,jdbcType=BIGINT}, 
+      #{articleCommentCount,jdbcType=BIGINT}, #{articleDate,jdbcType=TIMESTAMP}, #{articleLikeCount,jdbcType=BIGINT}, 
+      #{articleTitle,jdbcType=LONGVARCHAR}, #{articleContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.rosycloud.pojo.ArticlesWithBLOBs">
+    insert into articles
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        article_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="articleViews != null">
+        article_views,
+      </if>
+      <if test="articleCommentCount != null">
+        article_comment_count,
+      </if>
+      <if test="articleDate != null">
+        article_date,
+      </if>
+      <if test="articleLikeCount != null">
+        article_like_count,
+      </if>
+      <if test="articleTitle != null">
+        article_title,
+      </if>
+      <if test="articleContent != null">
+        article_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="articleId != null">
+        #{articleId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="articleViews != null">
+        #{articleViews,jdbcType=BIGINT},
+      </if>
+      <if test="articleCommentCount != null">
+        #{articleCommentCount,jdbcType=BIGINT},
+      </if>
+      <if test="articleDate != null">
+        #{articleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleLikeCount != null">
+        #{articleLikeCount,jdbcType=BIGINT},
+      </if>
+      <if test="articleTitle != null">
+        #{articleTitle,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="articleContent != null">
+        #{articleContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.rosycloud.pojo.ArticlesWithBLOBs">
+    update articles
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="articleViews != null">
+        article_views = #{articleViews,jdbcType=BIGINT},
+      </if>
+      <if test="articleCommentCount != null">
+        article_comment_count = #{articleCommentCount,jdbcType=BIGINT},
+      </if>
+      <if test="articleDate != null">
+        article_date = #{articleDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="articleLikeCount != null">
+        article_like_count = #{articleLikeCount,jdbcType=BIGINT},
+      </if>
+      <if test="articleTitle != null">
+        article_title = #{articleTitle,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="articleContent != null">
+        article_content = #{articleContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.rosycloud.pojo.ArticlesWithBLOBs">
+    update articles
+    set user_id = #{userId,jdbcType=BIGINT},
+      article_views = #{articleViews,jdbcType=BIGINT},
+      article_comment_count = #{articleCommentCount,jdbcType=BIGINT},
+      article_date = #{articleDate,jdbcType=TIMESTAMP},
+      article_like_count = #{articleLikeCount,jdbcType=BIGINT},
+      article_title = #{articleTitle,jdbcType=LONGVARCHAR},
+      article_content = #{articleContent,jdbcType=LONGVARCHAR}
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.rosycloud.pojo.Articles">
+    update articles
+    set user_id = #{userId,jdbcType=BIGINT},
+      article_views = #{articleViews,jdbcType=BIGINT},
+      article_comment_count = #{articleCommentCount,jdbcType=BIGINT},
+      article_date = #{articleDate,jdbcType=TIMESTAMP},
+      article_like_count = #{articleLikeCount,jdbcType=BIGINT}
+    where article_id = #{articleId,jdbcType=BIGINT}
+  </update>
+</mapper>
