@@ -9,6 +9,12 @@ rosycloud-web\target
 
 #IDEA project file
 *.iml
+rosycloud-common\*.iml
+rosycloud-dao\*.iml
+rosycloud-interface\*.iml
+rosycloud-pojo\*.iml
+rosycloud-service\*.iml
+rosycloud-web\*.iml
 
 # Compiled class file
 *.class
