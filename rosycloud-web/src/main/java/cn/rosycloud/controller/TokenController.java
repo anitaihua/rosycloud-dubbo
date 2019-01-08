@@ -59,7 +59,7 @@ public class TokenController {
 			Cookie cookie = new Cookie(Constants.DEFAULT_TOKEN_NAME, token.getUserId()+"_"+token.getToken());
 			log.debug("Write Token to Cookie and return to the Client : " + cookie.toString());
 			response.addCookie(cookie);
-			systemService.addLog(LogUtils.getInstance("["+username+"]登陆成功",Constants.Log_Type_LOGIN,Constants.Log_Leavel_INFO));
+			systemService.addLog(LogUtils.getInstance("["+username+"]登陆成功",Constants.Log_Type_LOGIN,Constants.Log_Leavel_INFO),username);
 			return Response.ok("Login Success...");
 		}
 		return Response.error("Login Failure...");
