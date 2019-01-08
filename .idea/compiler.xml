@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="rosycloud-common" />
+        <module name="rosycloud-dao" />
+        <module name="rosycloud-interface" />
+        <module name="rosycloud-pojo" />
+        <module name="rosycloud-service" />
+        <module name="rosycloud-web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="rosycloud-common" target="1.8" />
+      <module name="rosycloud-dao" target="1.8" />
+      <module name="rosycloud-dubbo" target="1.8" />
+      <module name="rosycloud-interface" target="1.8" />
+      <module name="rosycloud-pojo" target="1.8" />
+      <module name="rosycloud-service" target="1.8" />
+      <module name="rosycloud-web" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="rosycloud-service:war">
+    <output-path>$PROJECT_DIR$/rosycloud-service/target</output-path>
+    <root id="archive" name="rosycloud-service.war">
+      <element id="artifact" artifact-name="rosycloud-service:war exploded" />
+    </root>
+  </artifact>
+</component>
