@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	    http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd
         http://code.alibabatech.com/schema/dubbo
         http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
+    <context:property-placeholder location="classpath*:*.properties" />
+
     <!-- 用dubbo协议在20881端口暴露服务 -->
-    <dubbo:protocol name="dubbo" port="20881"/>
+    <dubbo:protocol name="dubbo" port="${protocol.port}"/>
 
     <!-- 当前应用名称（是注册中心识别的名称） -->
     <dubbo:application name="rosycloud-service"/>
     <!-- 注册中心地址（zookeeper） -->
-    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+    <dubbo:registry address="zookeeper://${registry.ip}:${registry.port}"/>
     <!-- 配置dubbo的包扫描 -->
     <dubbo:annotation package="cn.rosycloud.service.impl"/>
 

@@ -20,7 +20,6 @@ public class UsersController {
     private UsersService usersService;
 
     @RequestMapping(value = "/list",method = RequestMethod.GET)
-    @IgnoreSecurity
     public Response list(){
         List<Users> list = usersService.getUsers();
         return Response.ok().put("list",list);

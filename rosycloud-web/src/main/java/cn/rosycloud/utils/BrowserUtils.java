@@ -167,7 +167,7 @@ public class BrowserUtils {
 	public static String getBrowserLanguage(HttpServletRequest request) {
 		
 		String browserLang = request.getLocale().getLanguage();
-		String browserLangCode = (String)langMap.get(browserLang);
+		String browserLangCode = langMap.get(browserLang);
 		
 		if(browserLangCode == null)
 		{

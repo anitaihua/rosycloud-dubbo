@@ -17,10 +17,12 @@
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 
+    <context:property-placeholder location="classpath*:*.properties" />
+
     <!-- 当前应用名称（是注册中心识别的名称） -->
     <dubbo:application name="rosycloud-web"/>
     <!-- 注册中心地址(zookeeper) -->
-    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+    <dubbo:registry address="zookeeper://${registry.ip}:${registry.port}"/>
     <!-- 配置包扫描（同样不需要SpringMVC的包扫描） -->
     <dubbo:annotation package="cn.rosycloud.controller"/>
 
@@ -95,7 +97,7 @@
 
     <bean id="tokenManager" class="cn.rosycloud.authorization.manager.impl.DefaultTokenManager" />
 
-    <context:property-placeholder location="classpath*:*.properties" />
+
     <!--通过线程池的方式整合单台redis  -->
     <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
         <!--定义连接的总数  -->
