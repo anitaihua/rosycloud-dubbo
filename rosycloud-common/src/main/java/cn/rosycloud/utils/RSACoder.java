@@ -4,6 +4,8 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang.ArrayUtils;
 
 import javax.crypto.Cipher;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.security.*;
 import java.security.interfaces.RSAPrivateKey;
@@ -22,6 +24,9 @@ public class RSACoder
 
 	public static final String PUBLIC_KEY = "RSAPublicKey";// 公钥
 	public static final String PRIVATE_KEY = "RSAPrivateKey";// 私钥
+
+	public static final String PUBLIC_KEY_NAME = "rsa_public.key";// 公钥
+	public static final String PRIVATE_KEY_NAME = "rsa_private.key";// 私钥
 
 	public static String PRIVATEKEY = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAJJzWsMGoK7Rq6VgCZ4XlpHZScrimZ5PotLmZKq+kSR621NW3TLfWT4HZFJ8rAPvDLfi+1dp+hvA0nzsY4a2cR4mSk2Qp0juppvV/fp8VQMa4qPedK03wKk/j1o1Kg0QS4ZYIdRz8ZLbqcPkWIfuQwpnXoy4OEzIWkqxqmk7+7I7AgMBAAECgYBjhXCQR9i59FIot/LRNEZmJrs23HZ4VrXXjCmsvoPzvml9YPJAt/b1aCCMzZw3sCN8cwtKhAIrCgYATsPzr9d+Ffy0Xs2UDcgMYFWi6j8mfmEJoYk637Qj09TY87umT+uBJ7HEYyzaxg8uIpWiWdvts/CruiGq9CxpFrNxr5IYAQJBAM0ktlhU9y5seR1aXwH5KsUh/lndWlT/a8HZ4iinxt7n/reTDDPVD9NbPpf3zSQc8zwfrvmUfeuNmVpxH4NeVLsCQQC2wb49yFjb+oaNldbMtN5IAXCS99JOOmQebGq1tU5bl8NMNDa5gV6MpB8EV99CRa9VvsyTeYSzXtmDktGuqQCBAkEAqH+NHsS7OvByEsAV5YMJtF4Vky6TcdlSYylZ79bPLGwV9ibcEP7iPtJleWFaqFz3FN1ZVTq4qu/llDnyjm6+3QJAJenzqaWSqbBDkcPwF++93XpO/G5lNs1uT9F2IdRHOUE2xuxeHgX0s4Co3qHMM1d5lHRMxJuFKCEZRu6CiZWOAQJAEpVZvh414b7aXTbeTZymbYGc9LfvyBTYP1V/EVobPfWIFkcI3SzZid/pl8GBWkKGl0xYDGfNM+I2ezDHiUAwSA==";
 	public static String PUBLICKEY = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCSc1rDBqCu0aulYAmeF5aR2UnK4pmeT6LS5mSqvpEkettTVt0y31k+B2RSfKwD7wy34vtXafobwNJ87GOGtnEeJkpNkKdI7qab1f36fFUDGuKj3nStN8CpP49aNSoNEEuGWCHUc/GS26nD5FiH7kMKZ16MuDhMyFpKsappO/uyOwIDAQAB";
@@ -92,9 +97,23 @@ public class RSACoder
 		// 私钥
 		RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
 
+
+
 		Map<String, Object> keyMap = new HashMap<String, Object>(2);
 		keyMap.put(PUBLIC_KEY, publicKey);
 		keyMap.put(PRIVATE_KEY, privateKey);
+
+		//对象流形式写入公钥
+		OutputStream out=new FileOutputStream(PUBLIC_KEY_NAME);
+		out.write(getPublicKey(keyMap).getBytes("UTF-8"));
+		out.flush();
+		out.close();
+		//对象流形式写入私钥
+		OutputStream out1=new FileOutputStream(PRIVATE_KEY_NAME);
+
+		out1.write(getPrivateKey(keyMap).getBytes("UTF-8"));
+		out1.flush();
+		out1.close();
 
 		return keyMap;
 	}
