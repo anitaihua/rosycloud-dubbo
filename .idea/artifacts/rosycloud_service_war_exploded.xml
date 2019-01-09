@@ -55,6 +55,7 @@
           <element id="archive" name="rosycloud-common-1.0-SNAPSHOT.jar">
             <element id="module-output" name="rosycloud-common" />
           </element>
+          <element id="library" level="project" name="Maven: commons-lang:commons-lang:2.6" />
           <element id="archive" name="rosycloud-dao-1.0-SNAPSHOT.jar">
             <element id="module-output" name="rosycloud-dao" />
           </element>

@@ -1,8 +1,10 @@
 package cn.rosycloud.controller;
 
 import cn.rosycloud.authorization.annotation.IgnoreSecurity;
+import cn.rosycloud.authorization.annotation.SerializedField;
 import cn.rosycloud.pojo.Users;
 import cn.rosycloud.service.UsersService;
+import cn.rosycloud.utils.AESOperator;
 import cn.rosycloud.utils.Response;
 import com.alibaba.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +21,14 @@ public class UsersController {
     @Reference
     private UsersService usersService;
 
+    @IgnoreSecurity
+    @SerializedField
     @RequestMapping(value = "/list",method = RequestMethod.GET)
-    public Response list(){
+    public Response list() {
         List<Users> list = usersService.getUsers();
-        return Response.ok().put("list",list);
+
+        return Response.ok().put("list", list);
+
     }
 
 
