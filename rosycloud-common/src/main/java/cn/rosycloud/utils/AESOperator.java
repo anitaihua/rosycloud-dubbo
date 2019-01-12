@@ -1,5 +1,6 @@
 package cn.rosycloud.utils;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 import javax.crypto.Cipher;
@@ -37,6 +38,7 @@ public class AESOperator {
      * 加密
      *
      * @param content
+     * @param key
      * @return
      * @throws Exception
      */
@@ -113,7 +115,26 @@ public class AESOperator {
                  return null;
              }
          }
-         public static void main(String[] args) throws Exception {
+    /**
+     * 摘要处理
+     *
+     * @param data 待摘要数据
+     * @return 摘要字符串
+     */
+    public static String shaHex(byte[] data) {
+        return DigestUtils.md5Hex(data);
+    }
+    /**
+     * 验证
+     *
+     * @param data 待摘要数据
+     * @param messageDigest 摘要字符串
+     * @return 验证结果
+     */
+    public static boolean vailidate(byte[] data, String messageDigest) {
+        return messageDigest.equals(shaHex(data));
+    }
+    public static void main(String[] args) throws Exception {
              // 需要加密的字串
              String cSrc = "我爱你";
              // 加密
@@ -129,5 +150,6 @@ public class AESOperator {
              System.out.println("解密后的字串是：" + DeString);
              lUseTime = System.currentTimeMillis() - lStart;
              System.out.println("解密耗时：" + lUseTime + "毫秒");
-         }
+            System.out.println("校验签名:" + AESOperator.vailidate(enString.getBytes(), AESOperator.shaHex(enString.getBytes())));
+    }
 }

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script type="text/javascript" src="/js/jsencrypt.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-3.3.1.min.js" ></script>
+
+    <script>
+        var PUBLIC_KEY = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCSc1rDBqCu0aulYAmeF5aR2UnK4pmeT6LS5mSqvpEkettTVt0y31k+B2RSfKwD7wy34vtXafobwNJ87GOGtnEeJkpNkKdI7qab1f36fFUDGuKj3nStN8CpP49aNSoNEEuGWCHUc/GS26nD5FiH7kMKZ16MuDhMyFpKsappO/uyOwIDAQAB';
+        var encrypt=new JSEncrypt();
+        encrypt.setPublicKey('-----BEGIN PUBLIC KEY-----' + PUBLIC_KEY + '-----END PUBLIC KEY-----'jsencrypt.min.js:3 Message too long for RSA);
+
+        //encrypt.encrypt('加密的内容');
+　　    //encrypt.setPrivateKey(RSA的私钥);
+
+        $.get("http://localhost:9101/users/list",
+            function (result) {
+            console.log(encrypt.encrypt(result.data));
+                alert( result.sign);
+
+                if(result.msg =='success'){
+                   alert( encrypt.sign(result.sign));
+                }
+            //console.log(encrypt.encrypt('加密的内容'));
+               // console.log(encrypt.decrypt(result));
+
+            });
+
+    </script>
+</head>
+<body>
+<h1>Hello Word!</h1>
+</body>
+</html>

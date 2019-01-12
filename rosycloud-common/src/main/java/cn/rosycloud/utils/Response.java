@@ -15,7 +15,7 @@ public class Response extends HashMap<String, Object> {
 	private static final long serialVersionUID = 1L;
 	
 	public Response() {
-		put("code", 0);
+		put("code", 200);
 		put("msg", "success");
 	}
 	

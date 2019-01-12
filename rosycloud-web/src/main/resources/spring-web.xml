@@ -62,6 +62,29 @@
 
 
 
+
+    <!--<mvc:default-servlet-handler/>-->
+
+    <mvc:resources location="/js/" mapping="/js/**"/>
+    <mvc:resources location="/views/" mapping="/views/**.html"/>
+
+    <!-- 指定自己定义的validator -->
+    <mvc:annotation-driven validator="validator"/>
+
+    <!-- 以下 validator  ConversionService 在使用 mvc:annotation-driven 会 自动注册-->
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+        <!-- 如果不加默认到 使用classpath下的 ValidationMessages.properties -->
+        <property name="validationMessageSource" ref="messageSource"/>
+    </bean>
+    <!-- 国际化的消息资源文件（本系统中主要用于显示/错误消息定制） -->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="messages"/>
+        <property name="useCodeAsDefaultMessage" value="false"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="cacheSeconds" value="60"/>
+    </bean>
+
     <!-- SpringMVC的基本控制器 -->
     <context:component-scan base-package="cn.rosycloud">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
@@ -137,7 +160,7 @@
 
     <!-- 配置springmvc的视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/content/"/>
+        <property name="prefix" value="/views/"/>
         <property name="suffix" value=".html"/>
     </bean>
 </beans>

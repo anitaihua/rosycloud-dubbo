@@ -27,13 +27,14 @@ public class MyRequestBodyAdvice implements RequestBodyAdvice {
         return body;
     }
     @Override
-    public HttpInputMessage beforeBodyRead(HttpInputMessage inputMessage, MethodParameter parameter, Type targetType, Class<? extends HttpMessageConverter<?>> converterType) throws IOException {
-        try {
-            return new MyHttpInputMessage(inputMessage);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return inputMessage;
-        }
+    public HttpInputMessage beforeBodyRead(HttpInputMessage inputMessage, MethodParameter parameter, Type targetType, Class<? extends HttpMessageConverter<?>> converterType) {
+        return inputMessage;
+//        try {
+//            return new MyHttpInputMessage(inputMessage);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return inputMessage;
+//        }
     }
     @Override
     public Object afterBodyRead(Object body, HttpInputMessage inputMessage, MethodParameter parameter, Type targetType, Class<? extends HttpMessageConverter<?>> converterType) {
@@ -45,9 +46,9 @@ public class MyRequestBodyAdvice implements RequestBodyAdvice {
         public MyHttpInputMessage(HttpInputMessage inputMessage) throws Exception {
             this.headers = inputMessage.getHeaders();
             this.body = IOUtils.toInputStream(new String(RSACoder.decryptByPrivateKey(RSACoder.decryptBASE64(IOUtils.toString(inputMessage.getBody(), "UTF-8")),RSACoder.PRIVATEKEY)), "UTF-8");
-            logger.info("对方法method :" + inputMessage.getHeaders() + "返回数据进行加密");
+            logger.info("对方法method :" + inputMessage.getHeaders() + "返回数据进行解密");
         }
-        @Override public InputStream getBody() throws IOException {
+        @Override public InputStream getBody() {
             return body;
         }
         @Override public HttpHeaders getHeaders() {

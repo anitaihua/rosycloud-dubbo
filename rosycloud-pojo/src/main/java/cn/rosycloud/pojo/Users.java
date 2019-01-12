@@ -6,6 +6,11 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.enums.IdType;
 import com.baomidou.mybatisplus.activerecord.Model;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
 /**
@@ -23,7 +28,15 @@ public class Users extends Model<Users> {
     @TableId(value = "user_id", type = IdType.AUTO)
     private Long userId;
     private String userIp;
+
+    @NotEmpty(message = "{users.userName.null}")
+    @Length(min = 5, max = 20, message = "{users.userName.length.illegal}")
+    @Pattern(regexp = "[a-zA-Z]{5,20}", message = "{users.userName.illegal}")
     private String userName;
+
+    @NotNull(message = "{users.userPassword.null}")
+    @Length(min = 6, max = 20, message = "{users.userPassword.length.illegal}")
+    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-zA-Z])(?=.*[\\W_]).{6,20}", message = "{users.userPassword.illegal}")
     private String userPassword;
     private String userEmail;
     private String userProfilePhoto;

@@ -12,6 +12,10 @@ import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 返回数据加密
  */
@@ -25,6 +29,8 @@ public class MyResponseBodyAdvice implements ResponseBodyAdvice {
     @Override
     public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
         boolean encode = false;
+        Response r = null;
+        Map<String,Object> signmap=new HashMap<String,Object>();
         if (returnType.getMethod().isAnnotationPresent(SerializedField.class)) {
             //获取注解配置的包含和去除字段
             SerializedField serializedField = returnType.getMethodAnnotation(SerializedField.class);
@@ -34,9 +40,21 @@ public class MyResponseBodyAdvice implements ResponseBodyAdvice {
         if (encode) {
             logger.info("对方法method :" + returnType.getMethod().getName() + "返回数据进行加密");
             ObjectMapper objectMapper = new ObjectMapper();
+
             try {
                 String result = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(body);
-                return RSACoder.encryptBASE64(RSACoder.encryptByPrivateKey(result.getBytes(), RSACoder.PRIVATEKEY));
+                logger.info("结果集："+result);
+                if(returnType.getGenericParameterType().equals(Response.class)){
+                    String sign = AESOperator.shaHex(result.getBytes());
+
+                    r = (Response) body;
+                    signmap.put("code",r.get("code"));
+                    signmap.put("data", AESOperator.getInstance().encrypt(result));
+                    signmap.put("sign", sign);
+                    logger.info("sign："+sign);
+                    return signmap;
+                }
+                return body;
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
             } catch (Exception e) {
