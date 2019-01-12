@@ -67,7 +67,7 @@ public class AESOperator {
         Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
         cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
         byte[] encrypted = cipher.doFinal(content.getBytes("UTF-8"));
-        return new BASE64Encoder().encode(encrypted);// 此处使用BASE64做转码。
+        return new BASE64Encoder().encode(encrypted).replaceAll("\r\n", "").replaceAll("\r", "").replaceAll("\n", "");// 此处使用BASE64做转码。
          }
          /**
          * 解密
@@ -144,12 +144,14 @@ public class AESOperator {
              long lUseTime = System.currentTimeMillis() - lStart;
              System.out.println("加密耗时：" + lUseTime + "毫秒");
              // 解密
-             //enString ="VxJYymMW2ayA8WCB/YTpTMX6lihK8ZvlhozqtbvRZnVnGJMcV1p76iWc3P5usF5bQffwHCwnI1Ku\\r\\ncAck3rYEfQ/3ajEWNNI9l8U/rDs9XBocRtLsucY8j9MxVx+TVH5q61HUNIJswJoTuqO9M6YtwKjZ\\r\\nObNNa1JvG3czUPq+P7mZ46+/Ic9ERd9S5s8wC6rFLusCgAzqzqpkFDcOfnX52ykavLVoi2k8oiY9\\r\\nwwUIoabnqihHaYEUDcuZlg/KzgmJhQshDKKXg/svYEF0ffd0TE1MwfrvKfuGyawnfmHHzQ63RKQI\\r\\nHBqIC0N8+QHjj6JDdjvt5lt6oiU0bG7SUzb5Md95xPb1o0j4cIG0TFYKPWTg2c3zKaxC6Q4v2eWB\\r\\nMmGKOOvnG3+wdgy3H8KP6mJl28kXK+71Q8mro292UPVpjJzz588D1aJ/Be6RjW2UDqai7PpxCdWm\\r\\nE1ZdDOineqabQ2Fdwz8n87Git+aEVuM/Dw9UWz5yc6ryMGth+OTjeMR7ZMjYPV3bmiZDfaX4bNkh\\r\\nStHIFUd/2QPZWP13VU22a5QyDjxMwqZYDJcoVm0mCmJvrKZZiGGSsg2e15Gynv5Czax9wMzcWVHj\\r\\nIUZhhqsIKcoFF91EjetrlNL75dSKumwo540PTv+0rqT9M84YmuC0PCrOwlVrO0s7QHdCU0ZykgAt\\r\\nLEqZAfjPs86ariyHf/aBi2SDMtHR6nTu+BYf2+fK+9cqmClrsEM/ULXz5aMFeTU9P1omGJ44BZEe\\r\\nfyt9j23dcVc8PAwTw0IqpQIhH6qhd3Q0p/atgeUI9qcQCMB+F9B+LLtl7WLa+2ibH2ndSU5Z";
+             enString ="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";
+             String sign = "1425f8cb3d11c38e3e1c867199f283c6";
              lStart = System.currentTimeMillis();
              String DeString = AESOperator.getInstance().decrypt(enString);
              System.out.println("解密后的字串是：" + DeString);
              lUseTime = System.currentTimeMillis() - lStart;
              System.out.println("解密耗时：" + lUseTime + "毫秒");
-            System.out.println("校验签名:" + AESOperator.vailidate(enString.getBytes(), AESOperator.shaHex(enString.getBytes())));
+             System.out.println("sign:"+AESOperator.shaHex(DeString.getBytes()));
+            System.out.println("校验签名:" + AESOperator.vailidate(DeString.getBytes(), sign));
     }
 }
