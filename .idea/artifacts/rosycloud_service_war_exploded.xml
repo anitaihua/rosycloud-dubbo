@@ -1,13 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="rosycloud-service:war exploded">
     <output-path>$PROJECT_DIR$/rosycloud-service/target/rosycloud-service</output-path>
-    <properties id="maven-jee-properties">
-      <options>
-        <exploded>true</exploded>
-        <module>rosycloud-service</module>
-        <packaging>war</packaging>
-      </options>
-    </properties>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -67,6 +60,7 @@
             <element id="module-output" name="rosycloud-common" />
           </element>
           <element id="library" level="project" name="Maven: commons-lang:commons-lang:2.6" />
+          <element id="library" level="project" name="Maven: org.bouncycastle:bcprov-jdk15on:1.60" />
           <element id="archive" name="rosycloud-dao-1.0-SNAPSHOT.jar">
             <element id="module-output" name="rosycloud-dao" />
           </element>

@@ -13,7 +13,7 @@ public class AESOperator {
     /*
      * 加密用的Key 可以用26个字母和数字组成 此处使用AES-128-CBC加密模式，key需要为16位。
      */
-    private String KEY = "!QA2Z@w1sxO*(-8L";
+    private String KEY = "!QA2Z@w!WFNZFU_{H%M(S|a1sxO*(-8L";
     private String VECTOR = "!WFNZFU_{H%M(S|a";
     private static AESOperator instance = null;
     private AESOperator() { }
@@ -58,13 +58,13 @@ public class AESOperator {
         if (key == null) {
             return null;
         }
-        if (key.length() != 16) {
+        if (key.length() != 32) {
             return null;
         }
         SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes("UTF-8"), "AES");
         IvParameterSpec iv = new IvParameterSpec(vector.getBytes());
         // 使用CBC模式，需要一个向量iv，可增加加密算法的强度
-        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+        Cipher cipher = Cipher.getInstance("AES/ECB/PKCS7Padding");
         cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
         byte[] encrypted = cipher.doFinal(content.getBytes("UTF-8"));
         return new BASE64Encoder().encode(encrypted).replaceAll("\r\n", "").replaceAll("\r", "").replaceAll("\n", "");// 此处使用BASE64做转码。
@@ -101,10 +101,10 @@ public class AESOperator {
          public String decrypt(String content, String key, String vector) throws Exception {
              try {
                  if (key == null) { return null; }
-                 if (key.length() != 16) { return null; }
+                 if (key.length() != 32) { return null; }
                  SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes("UTF-8"), "AES");
                  IvParameterSpec iv = new IvParameterSpec(vector.getBytes());
-                 Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+                 Cipher cipher = Cipher.getInstance("AES/ECB/PKCS7Padding");
                  cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);
                  byte[] encrypted1 = new BASE64Decoder().decodeBuffer(content);
                  // 先用base64解密

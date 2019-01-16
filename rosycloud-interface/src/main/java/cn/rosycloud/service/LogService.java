@@ -1,7 +1,10 @@
 package cn.rosycloud.service;
 
 import cn.rosycloud.pojo.Log;
+import cn.rosycloud.pojo.PageResult;
 import com.baomidou.mybatisplus.service.IService;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.service.IService;
  */
 public interface LogService extends IService<Log> {
 
+    PageResult list(Map<String, Object> params);
 }

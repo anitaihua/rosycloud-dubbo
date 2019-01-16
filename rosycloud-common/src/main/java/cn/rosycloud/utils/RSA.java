@@ -27,7 +27,7 @@ public class RSA{
 	{
         try 
         {
-        	PKCS8EncodedKeySpec priPKCS8 	= new PKCS8EncodedKeySpec( Base64.decode(privateKey) ); 
+        	PKCS8EncodedKeySpec priPKCS8 	= new PKCS8EncodedKeySpec( LBase64.decode(privateKey) );
         	KeyFactory keyf 				= KeyFactory.getInstance("RSA");
         	PrivateKey priKey 				= keyf.generatePrivate(priPKCS8);
 
@@ -39,7 +39,7 @@ public class RSA{
 
             byte[] signed = signature.sign();
             
-            return Base64.encode(signed);
+            return LBase64.encode(signed);
         }
         catch (Exception e) 
         {
@@ -62,7 +62,7 @@ public class RSA{
 		try 
 		{
 			KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-	        byte[] encodedKey = Base64.decode(ali_public_key);
+	        byte[] encodedKey = LBase64.decode(ali_public_key);
 	        PublicKey pubKey = keyFactory.generatePublic(new X509EncodedKeySpec(encodedKey));
 
 		
@@ -72,7 +72,7 @@ public class RSA{
 			signature.initVerify(pubKey);
 			signature.update( content.getBytes(input_charset) );
 		
-			boolean bverify = signature.verify( Base64.decode(sign) );
+			boolean bverify = signature.verify( LBase64.decode(sign) );
 			return bverify;
 			
 		} 
@@ -97,7 +97,7 @@ public class RSA{
         Cipher cipher = Cipher.getInstance("RSA");
         cipher.init(Cipher.DECRYPT_MODE, prikey);
 
-        InputStream ins = new ByteArrayInputStream(Base64.decode(content));
+        InputStream ins = new ByteArrayInputStream(LBase64.decode(content));
         ByteArrayOutputStream writer = new ByteArrayOutputStream();
         //rsa解密的字节大小最多是128，将需要解密的内容，按128位拆开解密
         byte[] buf = new byte[128];
@@ -131,7 +131,7 @@ public class RSA{
 
 		byte[] keyBytes;
 		
-		keyBytes = Base64.decode(key);
+		keyBytes = LBase64.decode(key);
 		
 		PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(keyBytes);
 		

@@ -8,6 +8,42 @@
          id="WebApp_ID" version="3.0">
   <display-name>rosycloud-web</display-name>
 
+  <context-param>
+    <param-name>log4jConfigLocation</param-name>
+    <param-value>classpath:log4j.properties</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+  </listener>
+
+
+  <!-- 通过CORS技术实现AJAX跨域访问 -->
+  <filter>
+    <filter-name>CorsFilter</filter-name>
+    <filter-class>cn.rosycloud.filter.CorsFilter</filter-class>
+    <init-param>
+      <param-name>allowOrigin</param-name>
+      <param-value>http://192.168.2.237:9101,http://localhost:8100,http://127.0.0.1:8100</param-value>
+    </init-param>
+    <init-param>
+      <param-name>allowMethods</param-name>
+      <param-value>GET,POST,PUT,DELETE,OPTIONS</param-value>
+    </init-param>
+    <init-param>
+      <param-name>allowCredentials</param-name>
+      <param-value>true</param-value>
+    </init-param>
+    <init-param>
+      <param-name>allowHeaders</param-name>
+      <param-value>Origin,X-Requested-With,Content-Type,Accept,X-Token</param-value>
+    </init-param>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>CorsFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
   <filter>
     <filter-name>encodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

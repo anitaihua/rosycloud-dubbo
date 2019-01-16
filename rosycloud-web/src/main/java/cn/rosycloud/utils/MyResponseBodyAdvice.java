@@ -45,13 +45,13 @@ public class MyResponseBodyAdvice implements ResponseBodyAdvice {
                 String result = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(body);
                 logger.info("结果集："+result);
                 if(returnType.getGenericParameterType().equals(Response.class)){
-                    String sign = AESOperator.shaHex(result.getBytes());
+                    //String sign = AESOperator.shaHex(result.getBytes());
 
                     r = (Response) body;
                     signmap.put("code",r.get("code"));
-                    signmap.put("data", AESOperator.getInstance().encrypt(result));
-                    signmap.put("sign", sign);
-                    logger.info("sign："+sign);
+                    signmap.put("data", AES256.getInstance().encrypt(result));
+                    //signmap.put("sign", sign);
+                    //logger.info("sign："+sign);
                     return signmap;
                 }
                 return body;

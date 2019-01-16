@@ -84,7 +84,7 @@ public class TokenController {
 			systemService.addLog(LogUtils.getInstance("["+user.getUserName()+"]登出成功",Constants.Log_Type_EXIT,Constants.Log_Leavel_INFO));
 			return Response.ok("Logout Success...");
 		}else{
-			return Response.error(401,"Logout Failure...");
+			return Response.error(601,"Logout Failure...");
 		}
 
 	}

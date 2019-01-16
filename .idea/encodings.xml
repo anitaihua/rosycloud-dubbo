@@ -8,5 +8,7 @@
     <file url="file://$PROJECT_DIR$/rosycloud-pojo" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/rosycloud-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/rosycloud-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rsa_private.key" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/rsa_public.key" charset="GBK" />
   </component>
 </project>

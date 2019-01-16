@@ -56,7 +56,7 @@ public class SecurityAspect {
 		if (!tokenManager.checkToken(model)) {
 			String message = String.format("token [%s] is invalid", token);
 			log.debug("message : " + message);
-			return Response.error(401,message);
+			return Response.error(601,message);
 		}
 		// 调用目标方法
 		return pjp.proceed();

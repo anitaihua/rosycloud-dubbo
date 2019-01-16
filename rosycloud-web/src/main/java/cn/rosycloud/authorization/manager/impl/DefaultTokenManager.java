@@ -1,6 +1,7 @@
 package cn.rosycloud.authorization.manager.impl;
 
 import cn.rosycloud.authorization.manager.TokenManager;
+import cn.rosycloud.config.Constants;
 import cn.rosycloud.model.TokenModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -10,6 +11,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -27,10 +29,6 @@ public class DefaultTokenManager implements TokenManager {
 	@Autowired
 	public void setRedis(RedisTemplate redis) {
 		this.redis = redis;
-		//泛型设置成Long后必须更改对应的序列化方案
-		RedisSerializer redisSerializer = new StringRedisSerializer();
-		redis.setKeySerializer(new JdkSerializationRedisSerializer());
-		redis.setValueSerializer(redisSerializer);
 	}
 
 	public TokenModel createToken(Long userId) {
@@ -66,8 +64,8 @@ public class DefaultTokenManager implements TokenManager {
 		if (token == null || !token.equals(model.getToken())) {
 			return false;
 		}
-        /*//如果验证成功，说明此用户进行了一次有效操作，延长token的过期时间
-        redis.boundValueOps(model.getUserId()).expire(Constants.TOKEN_EXPIRES_HOUR, TimeUnit.HOURS);*/
+        //如果验证成功，说明此用户进行了一次有效操作，延长token的过期时间
+        redis.boundValueOps(model.getUserId()).expire(Constants.TOKEN_EXPIRES_HOUR, TimeUnit.HOURS);
 		return true;
 	}
 
