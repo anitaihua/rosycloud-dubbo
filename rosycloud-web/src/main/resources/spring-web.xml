@@ -90,6 +90,10 @@
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
     </context:component-scan>
     <mvc:annotation-driven>
+        <mvc:argument-resolvers>
+            <!--配置注入登录用户的解析器-->
+            <bean id="currentUserMethodArgumentResolver" class="cn.rosycloud.authorization.rosolvers.CurrentUserMethodArgumentResolver"/>
+        </mvc:argument-resolvers>
         <mvc:message-converters register-defaults="true">
             <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
                 <property name="supportedMediaTypes" value="application/json"/>

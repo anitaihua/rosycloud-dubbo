@@ -7,6 +7,7 @@ import cn.rosycloud.pojo.PageResult;
 import cn.rosycloud.service.LogService;
 import cn.rosycloud.utils.Response;
 import com.alibaba.dubbo.config.annotation.Reference;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
 
 /**
@@ -34,7 +38,23 @@ public class LogController {
     @ResponseBody
     @IgnoreSecurity
     @RequestMapping("/list")
-    public Response list(@RequestParam Map<String, Object> params, HttpServletRequest request){
+    public Response list(@RequestBody Map<String, Object> params, HttpServletRequest request){
+
+        System.out.println(params);
+
+        try {
+            InputStream inputStream = request.getInputStream();
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            byte[] bytes = new byte[1024];
+            int flag = 0;
+            while ((flag = inputStream.read(bytes)) > 0){
+                byteArrayOutputStream.write(bytes,0,flag);
+            }
+            System.out.println(new String(byteArrayOutputStream.toByteArray(),request.getCharacterEncoding()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         PageResult list = logService.list(params);
 
