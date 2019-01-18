@@ -2,6 +2,7 @@ package cn.rosycloud.authorization.aspect;
 
 import java.lang.reflect.Method;
 
+import cn.rosycloud.config.HttpStatusCode;
 import cn.rosycloud.model.TokenModel;
 import cn.rosycloud.authorization.manager.TokenManager;
 import cn.rosycloud.authorization.annotation.IgnoreSecurity;
@@ -56,7 +57,7 @@ public class SecurityAspect {
 		if (!tokenManager.checkToken(model)) {
 			String message = String.format("token [%s] is invalid", token);
 			log.debug("message : " + message);
-			return Response.error(601,message);
+			return new Response().failure(HttpStatusCode.TOKEN_EXPIRE,message);
 		}
 		// 调用目标方法
 		return pjp.proceed();

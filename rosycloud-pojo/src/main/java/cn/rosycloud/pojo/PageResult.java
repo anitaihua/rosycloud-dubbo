@@ -5,14 +5,11 @@ import java.util.List;
 
 /**
  * 分页返回的实体类
- * @author jt
+ * @author yangdaihua
  *
  */
 public class PageResult implements Serializable{
-    /**
-     *
-     */
-    private static final long serialVersionUID = -8040100620884340025L;
+
 
     private long total; // 总记录数
     private List rows; // 返回每页的数据的集合

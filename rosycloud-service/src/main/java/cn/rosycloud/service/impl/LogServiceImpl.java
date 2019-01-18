@@ -25,9 +25,7 @@ public class LogServiceImpl extends ServiceImpl<LogMapper, Log> implements LogSe
 
     @Override
     public PageResult list(Map<String, Object> params) {
-        Page<Log> page = new Page<Log>();
-
-        page = this.selectPage(new Query<Log>(params).getPage(),new EntityWrapper<>());
+        Page<Log> page = this.selectPage(new Query<Log>(params).getPage(),new EntityWrapper<>());
 
         return new PageResult(page.getTotal(),page.getRecords());
     }

@@ -40,7 +40,7 @@ public class UsersController {
     public Response list() {
         List<Users> list = usersService.getUsers();
 
-        return Response.ok().put("list", list);
+        return new Response().success(list);
 
     }
 
@@ -52,17 +52,17 @@ public class UsersController {
         if(result.hasErrors()){
             FieldError fieldError= result.getFieldError();
             massage = ValidationUtils.getDefaultMessage(fieldError);
-            return Response.error(massage);
+            return new Response().failure(massage);
         }
         try {
             usersService.insert(users);
             systemService.addLog(LogUtils.getInstance("["+users.getUserName()+"]用户添加成功", Constants.Log_Type_INSERT,Constants.Log_Leavel_INFO));
         }catch (Exception e){
             e.printStackTrace();
-            return Response.error("网络问题，请稍后再试");
+            return new Response().failure("网络问题，请稍后再试");
         }
 
-        return Response.ok();
+        return new Response().success();
     }
 
     @IgnoreSecurity

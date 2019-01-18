@@ -4,6 +4,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cn.rosycloud.config.HttpStatusCode;
 import cn.rosycloud.model.TokenModel;
 import cn.rosycloud.authorization.manager.TokenManager;
 import cn.rosycloud.authorization.annotation.IgnoreSecurity;
@@ -61,9 +62,9 @@ public class TokenController {
 			log.debug("Write Token to Cookie and return to the Client : " + cookie.toString());
 			response.addCookie(cookie);
 			systemService.addLog(LogUtils.getInstance("["+username+"]登陆成功",Constants.Log_Type_LOGIN,Constants.Log_Leavel_INFO),username);
-			return Response.ok("Login Success...");
+			return new Response().success("Login Success...");
 		}
-		return Response.error("Login Failure...");
+		return new Response().failure(HttpStatusCode.USERNAME_OR_PASSWORD_WRONG,"Login Failure...");
 	}
 
 	/**     
@@ -82,9 +83,9 @@ public class TokenController {
 			tokenManager.deleteToken(model.getUserId());
 			log.debug("Logout Success...");
 			systemService.addLog(LogUtils.getInstance("["+user.getUserName()+"]登出成功",Constants.Log_Type_EXIT,Constants.Log_Leavel_INFO));
-			return Response.ok("Logout Success...");
+			return new Response().success("Logout Success...");
 		}else{
-			return Response.error(601,"Logout Failure...");
+			return new Response().failure(HttpStatusCode.TOKEN_EXPIRE,"Logout Failure...");
 		}
 
 	}

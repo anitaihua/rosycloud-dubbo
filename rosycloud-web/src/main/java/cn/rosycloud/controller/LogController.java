@@ -3,10 +3,12 @@ package cn.rosycloud.controller;
 
 import cn.rosycloud.authorization.annotation.IgnoreSecurity;
 import cn.rosycloud.authorization.annotation.SerializedField;
+import cn.rosycloud.config.HttpStatusCode;
 import cn.rosycloud.pojo.PageResult;
 import cn.rosycloud.service.LogService;
 import cn.rosycloud.utils.Response;
 import com.alibaba.dubbo.config.annotation.Reference;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -35,30 +37,20 @@ public class LogController {
     @Reference
     private LogService logService;
 
+    /**
+     * 获取日志列表
+     * @param params ionic3是以json格式传参的，使用@RequestBody接收
+     * @param request
+     * @return
+     */
     @ResponseBody
     @IgnoreSecurity
     @RequestMapping("/list")
     public Response list(@RequestBody Map<String, Object> params, HttpServletRequest request){
 
-        System.out.println(params);
-
-        try {
-            InputStream inputStream = request.getInputStream();
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            byte[] bytes = new byte[1024];
-            int flag = 0;
-            while ((flag = inputStream.read(bytes)) > 0){
-                byteArrayOutputStream.write(bytes,0,flag);
-            }
-            System.out.println(new String(byteArrayOutputStream.toByteArray(),request.getCharacterEncoding()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
         PageResult list = logService.list(params);
 
-        return Response.ok().put("list",list);
+        return new Response().success(list);
     }
 
 }

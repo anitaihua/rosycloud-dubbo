@@ -29,8 +29,7 @@ public class MyResponseBodyAdvice implements ResponseBodyAdvice {
     @Override
     public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
         boolean encode = false;
-        Response r = null;
-        Map<String,Object> signmap=new HashMap<String,Object>();
+
         if (returnType.getMethod().isAnnotationPresent(SerializedField.class)) {
             //获取注解配置的包含和去除字段
             SerializedField serializedField = returnType.getMethodAnnotation(SerializedField.class);
@@ -47,12 +46,11 @@ public class MyResponseBodyAdvice implements ResponseBodyAdvice {
                 if(returnType.getGenericParameterType().equals(Response.class)){
                     //String sign = AESOperator.shaHex(result.getBytes());
 
-                    r = (Response) body;
-                    signmap.put("code",r.get("code"));
-                    signmap.put("data", AES256.getInstance().encrypt(result));
+                    Response r = (Response) body;
+                    r.setData(AES256.getInstance().encrypt(r.getData().toString()));
                     //signmap.put("sign", sign);
                     //logger.info("sign："+sign);
-                    return signmap;
+                    return r;
                 }
                 return body;
             } catch (JsonProcessingException e) {
