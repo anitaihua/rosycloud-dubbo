@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.rosycloud.mapper.ArticleMapper">
+
+    <!-- 开启二级缓存 -->
+    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.rosycloud.pojo.Article">
+        <id column="article_id" property="articleId" />
+        <result column="user_id" property="userId" />
+        <result column="article_title" property="articleTitle" />
+        <result column="article_cover" property="articleCover" />
+        <result column="article_views" property="articleViews" />
+        <result column="article_date" property="articleDate" />
+        <result column="article_like_count" property="articleLikeCount" />
+        <result column="article_comment_count" property="articleCommentCount" />
+        <result column="open" property="open" />
+        <result column="df" property="df" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        article_id, user_id, article_title, article_cover, article_views, article_date, article_like_count, article_comment_count, open, df
+    </sql>
+
+</mapper>

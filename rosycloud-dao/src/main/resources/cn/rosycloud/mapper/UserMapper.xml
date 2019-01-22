@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.rosycloud.mapper.UserMapper">
+
+    <!-- 开启二级缓存 -->
+    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="cn.rosycloud.pojo.User">
+        <id column="user_id" property="userId" />
+        <result column="ip" property="ip" />
+        <result column="user_name" property="userName" />
+        <result column="password" property="password" />
+        <result column="email" property="email" />
+        <result column="profile_photo" property="profilePhoto" />
+        <result column="introduction" property="introduction" />
+        <result column="background_photo" property="backgroundPhoto" />
+        <result column="level" property="level" />
+        <result column="rights" property="rights" />
+        <result column="registration_time" property="registrationTime" />
+        <result column="birthday" property="birthday" />
+        <result column="age" property="age" />
+        <result column="telephone_number" property="telephoneNumber" />
+        <result column="nick_name" property="nickName" />
+        <result column="real_name" property="realName" />
+        <result column="status" property="status" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        user_id, ip, user_name, password, email, profile_photo, introduction, background_photo, level, rights, registration_time, birthday, age, telephone_number, nick_name, real_name, status
+    </sql>
+
+</mapper>

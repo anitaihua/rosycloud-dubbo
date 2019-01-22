@@ -7,11 +7,11 @@ import org.springframework.stereotype.Controller;
 
 /**
  * <p>
- *  前端控制器
+ * 文章设置标签表 前端控制器
  * </p>
  *
  * @author yangdaihua
- * @since 2019-01-07
+ * @since 2019-01-22
  */
 @Controller
 @RequestMapping("/setArtitleLabel")

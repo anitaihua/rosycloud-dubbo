@@ -9,9 +9,9 @@ import cn.rosycloud.model.TokenModel;
 import cn.rosycloud.authorization.manager.TokenManager;
 import cn.rosycloud.authorization.annotation.IgnoreSecurity;
 import cn.rosycloud.config.Constants;
-import cn.rosycloud.pojo.Users;
+import cn.rosycloud.pojo.User;
 import cn.rosycloud.service.SystemService;
-import cn.rosycloud.service.UsersService;
+import cn.rosycloud.service.UserService;
 import cn.rosycloud.utils.LogUtils;
 import cn.rosycloud.utils.Response;
 import com.alibaba.dubbo.config.annotation.Reference;
@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TokenController {
 
 	@Reference
-	private UsersService usersService;
+	private UserService usersService;
 	@Reference
 	private SystemService systemService;
 	@Autowired
@@ -79,7 +79,7 @@ public class TokenController {
 
 		TokenModel model = tokenManager.getToken(token);
 		if(tokenManager.checkToken(model)){
-			Users user = usersService.selectById(model.getUserId());
+			User user = usersService.selectById(model.getUserId());
 			tokenManager.deleteToken(model.getUserId());
 			log.debug("Logout Success...");
 			systemService.addLog(LogUtils.getInstance("["+user.getUserName()+"]登出成功",Constants.Log_Type_EXIT,Constants.Log_Leavel_INFO));

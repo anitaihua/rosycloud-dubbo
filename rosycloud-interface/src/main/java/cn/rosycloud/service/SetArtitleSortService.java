@@ -5,11 +5,11 @@ import com.baomidou.mybatisplus.service.IService;
 
 /**
  * <p>
- *  服务类
+ * 文章设置分类表 服务类
  * </p>
  *
  * @author yangdaihua
- * @since 2019-01-07
+ * @since 2019-01-22
  */
 public interface SetArtitleSortService extends IService<SetArtitleSort> {
 

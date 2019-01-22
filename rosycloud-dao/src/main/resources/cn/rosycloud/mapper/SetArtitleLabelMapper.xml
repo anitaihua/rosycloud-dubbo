@@ -7,13 +7,14 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="cn.rosycloud.pojo.SetArtitleLabel">
-        <id column="article_id" property="articleId" />
+        <id column="set_artitle_label_id" property="setArtitleLabelId" />
+        <result column="article_id" property="articleId" />
         <result column="label_id" property="labelId" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        article_id, label_id
+        set_artitle_label_id, article_id, label_id
     </sql>
 
 </mapper>

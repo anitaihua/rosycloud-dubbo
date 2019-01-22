@@ -2,8 +2,8 @@ package cn.rosycloud.authorization.rosolvers;
 
 import cn.rosycloud.authorization.annotation.CurrentUser;
 import cn.rosycloud.config.Constants;
-import cn.rosycloud.pojo.Users;
-import cn.rosycloud.service.UsersService;
+import cn.rosycloud.pojo.User;
+import cn.rosycloud.service.UserService;
 import com.alibaba.dubbo.config.annotation.Reference;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
@@ -24,12 +24,12 @@ import org.springframework.web.multipart.support.MissingServletRequestPartExcept
 public class CurrentUserMethodArgumentResolver implements HandlerMethodArgumentResolver {
 
     @Reference
-    private UsersService usersService;
+    private UserService userService;
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
         //如果参数类型是User并且有CurrentUser注解则支持
-        if (parameter.getParameterType().isAssignableFrom(Users.class) &&
+        if (parameter.getParameterType().isAssignableFrom(User.class) &&
                 parameter.hasParameterAnnotation(CurrentUser.class)) {
             return true;
         }
@@ -42,7 +42,7 @@ public class CurrentUserMethodArgumentResolver implements HandlerMethodArgumentR
         Long currentUserId = (Long) webRequest.getAttribute(Constants.CURRENT_USER_ID, RequestAttributes.SCOPE_REQUEST);
         if (currentUserId != null) {
             //从数据库中查询并返回
-            return usersService.selectById(currentUserId);
+            return userService.selectById(currentUserId);
         }
         throw new MissingServletRequestPartException(Constants.CURRENT_USER_ID);
     }

@@ -2,9 +2,9 @@ package cn.rosycloud.service.impl;
 
 import cn.rosycloud.mapper.LogMapper;
 import cn.rosycloud.pojo.Log;
-import cn.rosycloud.pojo.Users;
+import cn.rosycloud.pojo.User;
 import cn.rosycloud.service.SystemService;
-import cn.rosycloud.service.UsersService;
+import cn.rosycloud.service.UserService;
 import cn.rosycloud.utils.StringUtil;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
@@ -18,16 +18,16 @@ public class SystemServiceImpl implements SystemService {
     @Autowired
     private LogMapper logMapper;
     @Autowired
-    private UsersService usersService;
+    private UserService userService;
 
     @Override
     public void addLog(Log log) {
 
         if(log!=null&&log.getUserId()!=null){
-            Users u = usersService.selectById(log.getUserId());
+            User u = userService.selectById(log.getUserId());
             if(u!=null){
                 log.setUserName(u.getUserName());
-                log.setRealName(u.getUserNickname());
+                log.setRealName(u.getRealName());
             }else{
                 log.setUserName(log.getNote());
                 log.setRealName(log.getNote());
@@ -40,17 +40,17 @@ public class SystemServiceImpl implements SystemService {
     @Override
     public void addLog(Log log, String userName) {
         if(log!=null){
-            Users u = usersService.selectById(log.getUserId());
+            User u = userService.selectById(log.getUserId());
             if(u!=null){
                 log.setUserName(u.getUserName());
-                log.setRealName(u.getUserNickname());
+                log.setRealName(u.getRealName());
             }else{
                 if(StringUtil.isNotEmpty(userName)){
-                   u =  usersService.selectOne(new EntityWrapper<Users>().eq("user_name",userName));
+                   u =  userService.selectOne(new EntityWrapper<User>().eq("user_name",userName));
                     if(u!=null){
                         log.setUserId(u.getUserId());
                         log.setUserName(u.getUserName());
-                        log.setRealName(u.getUserNickname());
+                        log.setRealName(u.getRealName());
                     }
                 }else{
                     log.setUserName(log.getNote());
