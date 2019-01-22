@@ -157,6 +157,7 @@
                     <directory>${basedir}/src/main/java</directory>
                     <includes>
                         <include>**/*.properties</include>
+                        <include>**/*.conf</include>
                         <include>**/*.xml</include>
                     </includes>
                 </resource>
@@ -164,6 +165,7 @@
                     <directory>${basedir}/src/main/resources</directory>
                     <includes>
                         <include>**/*.properties</include>
+                        <include>**/*.conf</include>
                         <include>**/*.xml</include>
                     </includes>
                 </resource>

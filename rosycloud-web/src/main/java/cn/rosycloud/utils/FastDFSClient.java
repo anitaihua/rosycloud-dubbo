@@ -17,8 +17,8 @@ import java.io.*;
  */
 public class FastDFSClient {
 
-	//private static final String CONF_FILENAME = Thread.currentThread().getContextClassLoader().getResource("").getPath() + "fdfs_client.conf";
-	private static final String CONF_FILENAME = "fdfs_client.conf";
+	private static final String CONF_FILENAME = Thread.currentThread().getContextClassLoader().getResource("").getPath() + "fdfs_client.conf";
+	//private static final String CONF_FILENAME = "fdfs_client.conf";
 	private static StorageClient1 storageClient1 = null;
 
 	private static Logger logger = Logger.getLogger(FastDFSClient.class);
