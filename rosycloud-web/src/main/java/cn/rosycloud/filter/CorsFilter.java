@@ -18,8 +18,7 @@ import cn.rosycloud.utils.StringUtil;
 import org.apache.log4j.Logger;
 
 
-  
-/**        
+/**
  * Title: 跨域访问处理(跨域资源共享)    
  * Description: 解决前后端分离架构中的跨域问题
  * @author yangdaihua       
