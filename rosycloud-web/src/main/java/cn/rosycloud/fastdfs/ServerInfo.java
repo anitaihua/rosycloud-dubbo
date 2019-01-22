@@ -6,7 +6,7 @@
  * Please visit the FastDFS Home Page http://www.csource.org/ for more detail.
  */
 
-package cn.rosycloud.fastfds;
+package cn.rosycloud.fastdfs;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

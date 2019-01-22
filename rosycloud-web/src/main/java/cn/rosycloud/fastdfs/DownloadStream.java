@@ -1,4 +1,4 @@
-package cn.rosycloud.fastfds;
+package cn.rosycloud.fastdfs;
 
 import java.io.IOException;
 import java.io.OutputStream;
