@@ -4,7 +4,7 @@ import cn.rosycloud.pojo.ArticleUserLike;
 import cn.rosycloud.mapper.ArticleUserLikeMapper;
 import cn.rosycloud.service.ArticleUserLikeService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
+import com.alibaba.dubbo.config.annotation.Service;
 
 /**
  * <p>

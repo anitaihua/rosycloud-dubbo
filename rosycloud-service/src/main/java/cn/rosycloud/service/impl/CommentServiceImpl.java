@@ -4,7 +4,7 @@ import cn.rosycloud.pojo.Comment;
 import cn.rosycloud.mapper.CommentMapper;
 import cn.rosycloud.service.CommentService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
+import com.alibaba.dubbo.config.annotation.Service;
 
 /**
  * <p>

@@ -4,7 +4,7 @@ import cn.rosycloud.pojo.SetArtitleLabel;
 import cn.rosycloud.mapper.SetArtitleLabelMapper;
 import cn.rosycloud.service.SetArtitleLabelService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
+import com.alibaba.dubbo.config.annotation.Service;
 
 /**
  * <p>

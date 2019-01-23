@@ -4,8 +4,7 @@ import cn.rosycloud.pojo.SetArtitleSort;
 import cn.rosycloud.mapper.SetArtitleSortMapper;
 import cn.rosycloud.service.SetArtitleSortService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
-
+import com.alibaba.dubbo.config.annotation.Service;
 /**
  * <p>
  * 文章设置分类表 服务实现类

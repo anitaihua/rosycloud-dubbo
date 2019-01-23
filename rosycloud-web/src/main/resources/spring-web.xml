@@ -40,8 +40,8 @@
     <dubbo:reference interface="cn.rosycloud.service.LabelService" id="labelServiceImpl" check="false" />
     <dubbo:reference interface="cn.rosycloud.service.SetArticleContentService" id="setArticleContentServiceImpl" check="false" />
     <dubbo:reference interface="cn.rosycloud.service.SortService" id="sortServiceImpl" check="false" />
-    <dubbo:reference interface="cn.rosycloud.service.TypeService" id="typeServiceServiceImpl" check="false" />
-    <dubbo:reference interface="cn.rosycloud.service.UserService" id="userServiceServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.TypeService" id="typeServiceImpl" check="false" />
+    <dubbo:reference interface="cn.rosycloud.service.UserService" id="userServiceImpl" check="false" />
 
 
 

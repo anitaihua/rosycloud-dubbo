@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TokenController {
 
 	@Reference
-	private UserService usersService;
+	private UserService userService;
 	@Reference
 	private SystemService systemService;
 	@Autowired
@@ -54,7 +54,7 @@ public class TokenController {
 	@IgnoreSecurity
 	public Response login(@RequestParam("username") String username,
 						  @RequestParam("password") String password, HttpServletResponse response) {
-		Long flag = usersService.login(username, password);
+		Long flag = userService.login(username, password);
 		if (flag.compareTo((long)-1)!=0) {
 			TokenModel token = tokenManager.createToken(flag);
 			log.debug("**** Generate Token **** : " + token);
@@ -79,7 +79,7 @@ public class TokenController {
 
 		TokenModel model = tokenManager.getToken(token);
 		if(tokenManager.checkToken(model)){
-			User user = usersService.selectById(model.getUserId());
+			User user = userService.selectById(model.getUserId());
 			tokenManager.deleteToken(model.getUserId());
 			log.debug("Logout Success...");
 			systemService.addLog(LogUtils.getInstance("["+user.getUserName()+"]登出成功",Constants.Log_Type_EXIT,Constants.Log_Leavel_INFO));

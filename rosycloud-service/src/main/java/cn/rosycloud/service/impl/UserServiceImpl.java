@@ -3,8 +3,9 @@ package cn.rosycloud.service.impl;
 import cn.rosycloud.pojo.User;
 import cn.rosycloud.mapper.UserMapper;
 import cn.rosycloud.service.UserService;
+import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * <p>
@@ -17,8 +18,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
+    @Autowired
+    private UserMapper userMapper;
+
     @Override
     public Long login(String username, String password) {
-        return null;
+
+        User u = new User();
+        u.setUserName(username);
+        u.setPassword(password);
+        User user = userMapper.findByUserNameAndPassword(u);
+
+        return user == null ? (long)-1 : user.getUserId();
     }
 }

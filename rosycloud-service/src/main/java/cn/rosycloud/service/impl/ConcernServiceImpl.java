@@ -4,7 +4,7 @@ import cn.rosycloud.pojo.Concern;
 import cn.rosycloud.mapper.ConcernMapper;
 import cn.rosycloud.service.ConcernService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
+import com.alibaba.dubbo.config.annotation.Service;
 
 /**
  * <p>

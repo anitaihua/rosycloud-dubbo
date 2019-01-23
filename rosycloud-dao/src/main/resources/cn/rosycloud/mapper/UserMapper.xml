@@ -31,4 +31,11 @@
         user_id, ip, user_name, password, email, profile_photo, introduction, background_photo, level, rights, registration_time, birthday, age, telephone_number, nick_name, real_name, status
     </sql>
 
+    <select id="findByUserNameAndPassword" parameterType="cn.rosycloud.pojo.User" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_user
+        where user_name = #{userName,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+    </select>
+
 </mapper>

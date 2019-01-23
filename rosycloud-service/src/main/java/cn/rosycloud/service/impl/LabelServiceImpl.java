@@ -4,7 +4,7 @@ import cn.rosycloud.pojo.Label;
 import cn.rosycloud.mapper.LabelMapper;
 import cn.rosycloud.service.LabelService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
+import com.alibaba.dubbo.config.annotation.Service;
 
 /**
  * <p>

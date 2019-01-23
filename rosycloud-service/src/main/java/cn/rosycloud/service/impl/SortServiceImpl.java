@@ -4,7 +4,7 @@ import cn.rosycloud.pojo.Sort;
 import cn.rosycloud.mapper.SortMapper;
 import cn.rosycloud.service.SortService;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import org.springframework.stereotype.Service;
+import com.alibaba.dubbo.config.annotation.Service;
 
 /**
  * <p>
