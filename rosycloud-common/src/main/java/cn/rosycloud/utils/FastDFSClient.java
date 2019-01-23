@@ -2,9 +2,7 @@ package cn.rosycloud.utils;
 
 import cn.rosycloud.fastdfs.*;
 import org.apache.commons.lang.StringUtils;
-
 import org.apache.log4j.Logger;
-
 
 import java.io.*;
 

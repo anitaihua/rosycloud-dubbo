@@ -5,11 +5,13 @@ import cn.rosycloud.pojo.Log;
 import cn.rosycloud.pojo.User;
 import cn.rosycloud.service.SystemService;
 import cn.rosycloud.service.UserService;
+import cn.rosycloud.utils.FastDFSClient;
 import cn.rosycloud.utils.StringUtil;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.File;
 
 
 @Service
@@ -60,5 +62,23 @@ public class SystemServiceImpl implements SystemService {
             logMapper.insert(log);
         }
 
+    }
+
+    @Override
+    public String uploadFile(File file, String filename) {
+        if(!file.exists()||StringUtil.isEmpty(filename)) return "";
+        return  FastDFSClient.uploadFile(file, filename);
+    }
+
+    @Override
+    public String uploadFile(File file) {
+        if(!file.exists()) return "";
+        return  FastDFSClient.uploadFile(file, file.getName());
+    }
+
+    @Override
+    public boolean deleteFile(String fileId) {
+        int result = FastDFSClient.deleteFile(fileId);
+        return result == 0;
     }
 }

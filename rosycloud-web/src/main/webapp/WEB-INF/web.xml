@@ -23,7 +23,7 @@
     <filter-class>cn.rosycloud.filter.CorsFilter</filter-class>
     <init-param>
       <param-name>allowOrigin</param-name>
-      <param-value>http://192.168.2.237:9101,http://localhost:8080,http://localhost:8100,http://127.0.0.1:8100</param-value>
+      <param-value>http://10.10.10.121:9101,http://192.168.2.237:9101,http://localhost:8080,http://localhost:8100,http://127.0.0.1:8100</param-value>
     </init-param>
     <init-param>
       <param-name>allowMethods</param-name>

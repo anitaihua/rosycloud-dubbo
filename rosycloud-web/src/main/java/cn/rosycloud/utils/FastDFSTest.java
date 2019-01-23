@@ -56,8 +56,8 @@ public class FastDFSTest {
 	 * @throws Exception 
 	 */
 	public static void main(String[] args) throws Exception {
-		//upload();
-		download();
+		upload();
+		//download();
 		//delete();
 
 	}
