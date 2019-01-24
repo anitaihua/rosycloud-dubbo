@@ -1,10 +1,14 @@
 package cn.rosycloud.authorization.rosolvers;
 
 import cn.rosycloud.authorization.annotation.CurrentUser;
+import cn.rosycloud.authorization.aspect.WebContextUtil;
+import cn.rosycloud.authorization.manager.TokenManager;
 import cn.rosycloud.config.Constants;
+import cn.rosycloud.model.TokenModel;
 import cn.rosycloud.pojo.User;
 import cn.rosycloud.service.UserService;
 import com.alibaba.dubbo.config.annotation.Reference;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.support.WebDataBinderFactory;
@@ -23,8 +27,10 @@ import org.springframework.web.multipart.support.MissingServletRequestPartExcept
 @Component
 public class CurrentUserMethodArgumentResolver implements HandlerMethodArgumentResolver {
 
-    @Reference
+    @Autowired
     private UserService userService;
+    @Autowired
+    private TokenManager tokenManager;
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
@@ -39,11 +45,14 @@ public class CurrentUserMethodArgumentResolver implements HandlerMethodArgumentR
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
         //取出鉴权时存入的登录用户Id
-        Long currentUserId = (Long) webRequest.getAttribute(Constants.CURRENT_USER_ID, RequestAttributes.SCOPE_REQUEST);
-        if (currentUserId != null) {
+        String token = WebContextUtil.getRequest().getHeader(
+                Constants.DEFAULT_TOKEN_NAME);
+        //验证token
+        TokenModel model = tokenManager.getToken(token);
+        if (model.getUserId() != null) {
             //从数据库中查询并返回
-            return userService.selectById(currentUserId);
+            return userService.selectById(model.getUserId());
         }
-        throw new MissingServletRequestPartException(Constants.CURRENT_USER_ID);
+        throw new MissingServletRequestPartException(Constants.DEFAULT_TOKEN_NAME);
     }
 }

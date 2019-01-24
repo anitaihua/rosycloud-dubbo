@@ -76,7 +76,7 @@ public class User extends Model<User> {
     /**
      * 用户手机号
      */
-    private Integer telephoneNumber;
+    private Long telephoneNumber;
     /**
      * 用户昵称
      */
@@ -195,11 +195,11 @@ public class User extends Model<User> {
         this.age = age;
     }
 
-    public Integer getTelephoneNumber() {
+    public Long getTelephoneNumber() {
         return telephoneNumber;
     }
 
-    public void setTelephoneNumber(Integer telephoneNumber) {
+    public void setTelephoneNumber(Long telephoneNumber) {
         this.telephoneNumber = telephoneNumber;
     }
 

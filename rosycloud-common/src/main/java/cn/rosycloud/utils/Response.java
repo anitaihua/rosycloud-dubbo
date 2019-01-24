@@ -67,7 +67,7 @@ public class Response {
 
 		private boolean success;
 		private String message;
-		private Integer errorCode;
+		private Integer errorCode = 200;
 
 		public Meta(boolean success) {
 			this.success = success;

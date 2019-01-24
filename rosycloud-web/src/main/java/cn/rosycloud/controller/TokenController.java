@@ -14,15 +14,16 @@ import cn.rosycloud.service.SystemService;
 import cn.rosycloud.service.UserService;
 import cn.rosycloud.utils.LogUtils;
 import cn.rosycloud.utils.Response;
+import cn.rosycloud.utils.StringUtil;
 import com.alibaba.dubbo.config.annotation.Reference;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-  
+import java.util.HashMap;
+import java.util.Map;
+
+
 /**        
  * Title: Token的管理    
  * Description: 处理用户的登录、登出操作
@@ -52,9 +53,13 @@ public class TokenController {
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	@IgnoreSecurity
-	public Response login(@RequestParam("username") String username,
-						  @RequestParam("password") String password, HttpServletResponse response) {
+	public Response login(@RequestBody Map<String, Object> params, HttpServletRequest request, @RequestParam(value = "username",required = false) String username,
+						  @RequestParam(value = "password",required = false) String password, HttpServletResponse response) {
+		if(StringUtil.isEmpty(username)) username = (String) params.get("username");
+		if(StringUtil.isEmpty(password)) password = (String) params.get("password");
+
 		Long flag = userService.login(username, password);
+		Map<String,Object> result = new HashMap<>();
 		if (flag.compareTo((long)-1)!=0) {
 			TokenModel token = tokenManager.createToken(flag);
 			log.debug("**** Generate Token **** : " + token);
@@ -62,7 +67,8 @@ public class TokenController {
 			log.debug("Write Token to Cookie and return to the Client : " + cookie.toString());
 			response.addCookie(cookie);
 			systemService.addLog(LogUtils.getInstance("["+username+"]登陆成功",Constants.Log_Type_LOGIN,Constants.Log_Leavel_INFO),username);
-			return new Response().success("Login Success...");
+			result.put("token",token.getUserId()+"_"+token.getToken());
+			return new Response().success(result);
 		}
 		return new Response().failure(HttpStatusCode.USERNAME_OR_PASSWORD_WRONG,"Login Failure...");
 	}

@@ -35,7 +35,7 @@
     </init-param>
     <init-param>
       <param-name>allowHeaders</param-name>
-      <param-value>Origin,X-Requested-With,Content-Type,Accept,X-Token</param-value>
+      <param-value>Origin,X-Requested-With,Content-Type,Accept,X-Token,uuid</param-value>
     </init-param>
   </filter>
 

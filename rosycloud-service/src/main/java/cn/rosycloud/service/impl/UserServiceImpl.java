@@ -3,6 +3,7 @@ package cn.rosycloud.service.impl;
 import cn.rosycloud.pojo.User;
 import cn.rosycloud.mapper.UserMapper;
 import cn.rosycloud.service.UserService;
+import cn.rosycloud.utils.StringUtil;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public Long login(String username, String password) {
+
+        if(StringUtil.isEmpty(username)) return null;
+        if(StringUtil.isEmpty(password)) return null;
 
         User u = new User();
         u.setUserName(username);

@@ -42,25 +42,28 @@ public class SystemController {
      */
     @RequestMapping(value = "uploadFile",method = RequestMethod.POST)
     @IgnoreSecurity
-    public Response uploadFile(@RequestParam("file") MultipartFile file, HttpServletRequest request){
-        User user = new User();
-        user.setUserName("admin");
+    public Response uploadFile(@RequestParam("file") MultipartFile file, HttpServletRequest request,@CurrentUser User user){
         Map<String,Object> result = new HashMap<String, Object>();
         //获取真实文件名字
         String name = file.getOriginalFilename();
         String path = request.getSession().getServletContext().getRealPath("/upload");
         File file_temp = new File(path, name);
 
+        //判断本地临时上传目录upload是否存在，否则创建
+        File dirFile = new File(path);
+        if(!dirFile.exists()){
+            dirFile.mkdir();
+        }
         //开始存储文件
         try {
             file.transferTo(file_temp);
             String fileId = systemService.uploadFile(file_temp,name);
             log.info("文件:"+name+",上传成功! [fileId="+fileId+"]");
-            //systemService.addLog(LogUtils.getInstance("文件["+name+"]上传成功![fileId="+fileId+"]", Constants.Log_Type_UPLOAD,Constants.Log_Leavel_INFO),user.getUserName());
+            systemService.addLog(LogUtils.getInstance("文件["+name+"]上传成功![fileId="+fileId+"]", Constants.Log_Type_UPLOAD,Constants.Log_Leavel_INFO),user.getUserName());
             result.put("fileId",fileId);
             return  new Response().success(result);
         }catch (Exception e){
-            //systemService.addLog(LogUtils.getInstance("文件["+name+"]上传失败!", Constants.Log_Type_UPLOAD,Constants.Log_Leavel_INFO),user.getUserName());
+            systemService.addLog(LogUtils.getInstance("文件["+name+"]上传失败!", Constants.Log_Type_UPLOAD,Constants.Log_Leavel_INFO),user.getUserName());
             log.error(e);
             return new Response().failure(HttpStatusCode.ERROR,"Upload Failure...");
         } finally {
@@ -78,24 +81,22 @@ public class SystemController {
      */
     @RequestMapping(value = "deleteFile",method = RequestMethod.DELETE)
     @IgnoreSecurity
-    public Response deleteFile(@RequestBody String fileId, HttpServletRequest request){
-        User user = new User();
-        user.setUserName("admin");
+    public Response deleteFile(@RequestBody String fileId, HttpServletRequest request,@CurrentUser User user){
         try {
             boolean result = systemService.deleteFile(fileId);
             if(result){
                 log.info("文件:["+fileId+"],删除成功! ");
-                //systemService.addLog(LogUtils.getInstance("文件["+fileId+"]删除成功!", Constants.Log_Type_UPLOAD,Constants.Log_Leavel_INFO),user.getUserName());
+                systemService.addLog(LogUtils.getInstance("文件["+fileId+"]删除成功!", Constants.Log_Type_UPLOAD,Constants.Log_Leavel_INFO),user.getUserName());
                 return  new Response().success("文件:["+fileId+"],删除成功! ");
             }else {
                 log.info("文件:["+fileId+"],删除失败! ");
-                //systemService.addLog(LogUtils.getInstance("文件["+fileId+"]删除失败!", Constants.Log_Type_UPLOAD,Constants.Log_Leavel_INFO),user.getUserName());
+                systemService.addLog(LogUtils.getInstance("文件["+fileId+"]删除失败!", Constants.Log_Type_UPLOAD,Constants.Log_Leavel_INFO),user.getUserName());
                 return  new Response().success("文件:["+fileId+"],删除失败! ");
             }
 
 
         }catch (Exception e){
-            //systemService.addLog(LogUtils.getInstance("文件["+fileId+"]删除失败!", Constants.Log_Type_UPLOAD,Constants.Log_Leavel_INFO),user.getUserName());
+            systemService.addLog(LogUtils.getInstance("文件["+fileId+"]删除失败!", Constants.Log_Type_UPLOAD,Constants.Log_Leavel_INFO),user.getUserName());
             log.error(e);
             return new Response().failure(HttpStatusCode.ERROR,"Delete File Failure...");
         }
