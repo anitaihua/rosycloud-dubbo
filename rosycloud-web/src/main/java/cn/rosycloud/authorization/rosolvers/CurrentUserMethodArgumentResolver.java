@@ -43,16 +43,16 @@ public class CurrentUserMethodArgumentResolver implements HandlerMethodArgumentR
     }
 
     @Override
-    public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
+    public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
         //取出鉴权时存入的登录用户Id
         String token = WebContextUtil.getRequest().getHeader(
                 Constants.DEFAULT_TOKEN_NAME);
         //验证token
         TokenModel model = tokenManager.getToken(token);
-        if (model.getUserId() != null) {
+        if (model!=null && model.getUserId() != null) {
             //从数据库中查询并返回
             return userService.selectById(model.getUserId());
         }
-        throw new MissingServletRequestPartException(Constants.DEFAULT_TOKEN_NAME);
+        return null;
     }
 }
