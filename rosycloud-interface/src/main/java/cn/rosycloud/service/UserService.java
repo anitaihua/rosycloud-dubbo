@@ -14,4 +14,12 @@ import com.baomidou.mybatisplus.service.IService;
 public interface UserService extends IService<User> {
 
     Long login(String username, String password);
+
+    void updateLogo(User user, String fileId);
+
+    void updateBackgroundPhoto(User user, String fileId);
+
+    void updateNickName(User user, String nickName);
+
+    void updateIntroduction(User user, String introduction);
 }

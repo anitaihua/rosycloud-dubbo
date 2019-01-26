@@ -37,7 +37,6 @@ public class LogController {
      * @return
      */
     @ResponseBody
-    @IgnoreSecurity
     @RequestMapping("/list")
     public Response list(@RequestBody Map<String, Object> params, HttpServletRequest request){
 

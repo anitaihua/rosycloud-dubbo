@@ -35,4 +35,28 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         return user == null ? (long)-1 : user.getUserId();
     }
+
+    @Override
+    public void updateLogo(User user, String fileId) {
+        user.setProfilePhoto(fileId);
+        userMapper.updateById(user);
+    }
+
+    @Override
+    public void updateBackgroundPhoto(User user, String fileId) {
+        user.setBackgroundPhoto(fileId);
+        userMapper.updateById(user);
+    }
+
+    @Override
+    public void updateNickName(User user, String nickName) {
+        user.setNickName(nickName);
+        userMapper.updateById(user);
+    }
+
+    @Override
+    public void updateIntroduction(User user, String introduction) {
+        user.setIntroduction(introduction);
+        userMapper.updateById(user);
+    }
 }

@@ -79,7 +79,6 @@ public class TokenController {
 	 * @created 2017年7月4日 下午4:53:58     
 	 */
 	@RequestMapping(method = RequestMethod.DELETE)
-	@IgnoreSecurity
 	public Response logout(HttpServletRequest request) {
 		String token = request.getHeader(Constants.DEFAULT_TOKEN_NAME);
 
