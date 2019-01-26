@@ -1,20 +1,21 @@
 #Folders
 target
-rosycloud-common\target
-rosycloud-dao\target
-rosycloud-interface\target
-rosycloud-pojo\target
-rosycloud-service\target
-rosycloud-web\target
+rosycloud-common/target
+rosycloud-dao/target
+rosycloud-interface/target
+rosycloud-pojo/target
+rosycloud-service/target
+rosycloud-web/target
 
 #IDEA project file
+.idea
 *.iml
-rosycloud-common\*.iml
-rosycloud-dao\*.iml
-rosycloud-interface\*.iml
-rosycloud-pojo\*.iml
-rosycloud-service\*.iml
-rosycloud-web\*.iml
+rosycloud-common/*.iml
+rosycloud-dao/*.iml
+rosycloud-interface/*.iml
+rosycloud-pojo/*.iml
+rosycloud-service/*.iml
+rosycloud-web/*.iml
 
 # Compiled class file
 *.class
