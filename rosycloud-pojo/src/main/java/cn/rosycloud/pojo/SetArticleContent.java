@@ -33,13 +33,17 @@ public class SetArticleContent extends Model<SetArticleContent> {
      */
     private Long typeId;
     /**
-     * 正文图片路径
+     * 正文文件路径
      */
     private String contentUrl;
     /**
      * 正文内容
      */
     private String contentText;
+    /**
+     * 正文缩略图路径
+     */
+    private String contentImgUrl;
 
 
     public Long getContentId() {
@@ -82,6 +86,14 @@ public class SetArticleContent extends Model<SetArticleContent> {
         this.contentText = contentText;
     }
 
+    public String getContentImgUrl() {
+        return contentImgUrl;
+    }
+
+    public void setContentImgUrl(String contentImgUrl) {
+        this.contentImgUrl = contentImgUrl;
+    }
+
     @Override
     protected Serializable pkVal() {
         return this.contentId;
@@ -90,11 +102,12 @@ public class SetArticleContent extends Model<SetArticleContent> {
     @Override
     public String toString() {
         return "SetArticleContent{" +
-        ", contentId=" + contentId +
-        ", articleId=" + articleId +
-        ", typeId=" + typeId +
-        ", contentUrl=" + contentUrl +
-        ", contentText=" + contentText +
-        "}";
+                "contentId=" + contentId +
+                ", articleId=" + articleId +
+                ", typeId=" + typeId +
+                ", contentUrl='" + contentUrl + '\'' +
+                ", contentText='" + contentText + '\'' +
+                ", contentImgUrl='" + contentImgUrl + '\'' +
+                '}';
     }
 }

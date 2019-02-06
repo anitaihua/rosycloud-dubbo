@@ -129,6 +129,8 @@
             <artifactId>hibernate-validator</artifactId>
         </dependency>
 
+
+
         <dependency>
             <groupId>cn.rosycloud</groupId>
             <artifactId>rosycloud-service</artifactId>

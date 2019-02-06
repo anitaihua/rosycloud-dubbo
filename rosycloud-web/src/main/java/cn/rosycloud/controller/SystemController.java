@@ -9,13 +9,16 @@ import cn.rosycloud.pojo.User;
 import cn.rosycloud.service.SystemService;
 import cn.rosycloud.utils.LogUtils;
 import cn.rosycloud.utils.Response;
+import cn.rosycloud.utils.VideoUtils;
 import com.alibaba.dubbo.config.annotation.Reference;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,10 +47,18 @@ public class SystemController {
     @IgnoreSecurity
     public Response uploadFile(@RequestParam("file") MultipartFile file, HttpServletRequest request,@CurrentUser User user){
         Map<String,Object> result = new HashMap<String, Object>();
+        FileOutputStream fos = null;
         //获取真实文件名字
         String name = file.getOriginalFilename();
         String path = request.getSession().getServletContext().getRealPath("/upload");
         File file_temp = new File(path, name);
+
+        String[] fileStr = name.split(".");
+        if(fileStr.length!=2){
+            return new Response().failure(HttpStatusCode.ERROR,"Upload Failure...");
+        }
+        String ext = name.split(".")[1].toLowerCase();
+
 
         //判断本地临时上传目录upload是否存在，否则创建
         File dirFile = new File(path);
@@ -57,6 +68,22 @@ public class SystemController {
         //开始存储文件
         try {
             file.transferTo(file_temp);
+
+            //如果是视频文件，截取缩略图上传并返回
+            if(ext.matches("/(3gp|mp4|avi)$/")){
+                String imgFilename = name.split(".")[0]+".jpg";
+                File video_image_temp = new File(path, imgFilename);
+                fos = new FileOutputStream(video_image_temp);
+                ByteArrayOutputStream bos = VideoUtils.getThumbnail(file_temp);
+                bos.writeTo(fos);
+                fos.close();
+
+                String fileId2 = systemService.uploadFile(video_image_temp,imgFilename);
+                result.put("fileId2",fileId2);
+                log.info("文件:"+imgFilename+",上传成功! [fileId="+fileId2+"]");
+                systemService.addLog(LogUtils.getInstance("文件["+imgFilename+"]上传成功![fileId="+fileId2+"]", Constants.Log_Type_UPLOAD,Constants.Log_Leavel_INFO),user.getUserName());
+                video_image_temp.delete();
+            }
             String fileId = systemService.uploadFile(file_temp,name);
             log.info("文件:"+name+",上传成功! [fileId="+fileId+"]");
             systemService.addLog(LogUtils.getInstance("文件["+name+"]上传成功![fileId="+fileId+"]", Constants.Log_Type_UPLOAD,Constants.Log_Leavel_INFO),user.getUserName());

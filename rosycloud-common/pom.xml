@@ -48,6 +48,16 @@
             <scope>compile</scope>
         </dependency>
 
+        <!-- 视频截图-->
+        <dependency>
+            <groupId>org.jcodec</groupId>
+            <artifactId>jcodec</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jcodec</groupId>
+            <artifactId>jcodec-javase</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

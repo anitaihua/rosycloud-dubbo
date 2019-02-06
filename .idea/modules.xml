@@ -4,8 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/rosycloud-common/rosycloud-common.iml" filepath="$PROJECT_DIR$/rosycloud-common/rosycloud-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/rosycloud-dao/rosycloud-dao.iml" filepath="$PROJECT_DIR$/rosycloud-dao/rosycloud-dao.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/rosycloud-dubbo.iml" filepath="$PROJECT_DIR$/.idea/rosycloud-dubbo.iml" />
       <module fileurl="file://$PROJECT_DIR$/rosycloud-interface/rosycloud-interface.iml" filepath="$PROJECT_DIR$/rosycloud-interface/rosycloud-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rosycloud-parent.iml" filepath="$PROJECT_DIR$/rosycloud-parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/rosycloud-pojo/rosycloud-pojo.iml" filepath="$PROJECT_DIR$/rosycloud-pojo/rosycloud-pojo.iml" />
       <module fileurl="file://$PROJECT_DIR$/rosycloud-service/rosycloud-service.iml" filepath="$PROJECT_DIR$/rosycloud-service/rosycloud-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/rosycloud-web/rosycloud-web.iml" filepath="$PROJECT_DIR$/rosycloud-web/rosycloud-web.iml" />

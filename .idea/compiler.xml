@@ -19,6 +19,7 @@
       <module name="rosycloud-dao" target="1.8" />
       <module name="rosycloud-dubbo" target="1.8" />
       <module name="rosycloud-interface" target="1.8" />
+      <module name="rosycloud-parent" target="1.8" />
       <module name="rosycloud-pojo" target="1.8" />
       <module name="rosycloud-service" target="1.8" />
       <module name="rosycloud-web" target="1.8" />
