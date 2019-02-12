@@ -110,34 +110,31 @@
     <bean id="tokenManager" class="cn.rosycloud.authorization.manager.impl.DefaultTokenManager" />
 
 
-    <!--通过线程池的方式整合单台redis  -->
+    <!-- jedis 配置 -->
     <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
-        <!--定义连接的总数  -->
-        <property name="maxTotal" value="${redis.maxTotal}"/>
-
-        <!--定义最大的空闲数量  -->
-        <property name="maxIdle" value="${redis.maxIdle}"/>
-
-        <!--定义最小空闲数量  -->
-        <property name="minIdle" value="${redis.minIdle}"></property>
+        <!-- 最大空闲连接数 -->
+        <property name="maxIdle" value="${redis.maxIdle}" />
+        <!-- 最小空闲连接数 -->
+        <property name="minIdle" value="${redis.minIdle}" />
+        <property name="maxWaitMillis" value="${redis.maxWait}" />
+        <!-- 在获取连接的时候检查有效性 -->
+        <property name="testOnBorrow" value="${redis.testOnBorrow}" />
     </bean>
 
-
-    <!--通过工厂模式创建jedis连接
-     -->
-    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
-        <property name="hostName" value="${redis.host}"/>
-        <property name="port" value="${redis.port}"/>
-        <property name="password" value="${redis.password}"/>
-
-        <!--引入线程池的配置  -->
-        <property name="poolConfig" ref="poolConfig"/>
+    <!-- redis服务器中心 -->
+    <bean id="redisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="poolConfig" ref="poolConfig" />
+        <property name="port" value="${redis.port}" />
+        <property name="hostName" value="${redis.host}" />
+        <property name="password" value="${redis.password}" />
+        <property name="timeout" value="${redis.timeout}" />
+        <property name="database" value="${redis.database}" />
     </bean>
 
 
 
     <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
-        <property name="connectionFactory"   ref="jedisConnectionFactory" />
+        <property name="connectionFactory"   ref="redisConnectionFactory" />
         <property name="keySerializer">
             <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
         </property>
